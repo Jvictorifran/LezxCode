@@ -1,0 +1,14 @@
+{
+  "name": "lezx-code",
+  "version": "1.4.0",
+  "description": "Lezx Code — IDE leve para desenvolvimento web (macOS e Windows). Instala o app e o comando \"lezx\".",
+  "bin": { "lezx": "bin/lezx.js" },
+  "files": ["bin/", "README.md"],
+  "os": ["darwin", "win32"],
+  "engines": { "node": ">=18" },
+  "keywords": ["ide", "editor", "code-editor", "monaco", "live-server", "lezx"],
+  "homepage": "https://github.com/Jvictorifran/LezxCode",
+  "repository": { "type": "git", "url": "https://github.com/Jvictorifran/LezxCode.git", "directory": "npm" },
+  "author": "Joao Victor Ifran",
+  "license": "MIT"
+}

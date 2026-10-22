@@ -2,9 +2,10 @@
 import * as esbuild from 'esbuild';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 const watch = process.argv.includes('--watch');
-const ROOT = path.dirname(new URL(import.meta.url).pathname);
+const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const MONACO = path.join(ROOT, 'node_modules/monaco-editor/esm/vs');
 const DIST = path.join(ROOT, 'dist');
 

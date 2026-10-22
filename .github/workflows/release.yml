@@ -48,6 +48,19 @@ jobs:
       - uses: actions/upload-artifact@v4
         with: { name: windows-smoke, path: windows-smoke.png }
       - run: npm run dist:win
+      - name: Testa o instalador (silencioso) e o comando lezx no PATH
+        shell: pwsh
+        run: |
+          $setup = Get-ChildItem release/*-setup.exe | Select-Object -First 1
+          Start-Process $setup.FullName -ArgumentList '/S' -Wait
+          $exe = "$env:LOCALAPPDATA\Programs\lezx-code\Lezx Code.exe"
+          if (!(Test-Path $exe)) { throw "App não instalado em $exe" }
+          $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+          Write-Host "PATH do usuário: $userPath"
+          $res = "$env:LOCALAPPDATA\Programs\lezx-code\resources"
+          if (($userPath -split ';') -notcontains $res) { throw 'O instalador não colocou o lezx no PATH' }
+          if (!(Test-Path "$res\lezx.cmd")) { throw 'lezx.cmd não encontrado' }
+          Write-Host "OK: app instalado e lezx.cmd no PATH"
       - uses: actions/upload-artifact@v4
         with: { name: windows, path: release/*.exe }
 

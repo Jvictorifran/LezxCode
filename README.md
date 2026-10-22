@@ -2,6 +2,26 @@
 
 IDE leve para desenvolvimento web no macOS. Construída com as mesmas peças centrais do VS Code: **Monaco** (o editor) e **xterm.js** (o terminal), rodando sobre o Electron. O sistema de extensões ficou de fora, e o que importa para web já vem embutido.
 
+## Instalação
+
+**macOS — Homebrew**
+```bash
+brew install --cask jvictorifran/tap/lezx-code
+```
+
+**macOS e Windows — npm** (instala o app e o comando `lezx`)
+```bash
+npm install -g lezx-code
+lezx .
+```
+
+**Windows — winget** *(aguardando aprovação no repositório da Microsoft)*
+```powershell
+winget install Jvictorifran.LezxCode
+```
+
+Também dá para baixar o instalador direto nas [Releases](https://github.com/Jvictorifran/LezxCode/releases): `.dmg` para Mac (Apple Silicon ou Intel) e `-setup.exe` para Windows.
+
 ## O que vem embutido
 
 | Recurso | Detalhes |
@@ -140,8 +160,9 @@ As traduções embutidas ficam em `translations/pt-BR.json`. As suas ficam em `~
 ```bash
 npm install          # também corrige a permissão do spawn-helper do node-pty
 npm start            # build + abre o app
-npm run dist         # gera release/Lezx Code-<versão>-arm64.dmg
-npm run dist:universal   # DMG para Intel + Apple Silicon
+npm run dist         # DMG + ZIP para Apple Silicon em release/
+npm run dist:mac     # DMG + ZIP para Apple Silicon e Intel
+npm run dist:win     # instalador do Windows (gerar no Windows; o CI faz isso automaticamente)
 ```
 
 Estrutura:
@@ -161,6 +182,13 @@ icon-themes/     temas de ícones embutidos
 examples/        exemplos copiados para a pasta do usuário na primeira execução
 ```
 
-### Instalação
+### Publicando uma versão
+
+1. Suba a versão em `package.json` e `npm/package.json`.
+2. Crie a tag: `git tag v1.x.y && git push --tags`. O GitHub Actions gera os instaladores de Mac e Windows, testa o app no Windows e publica a Release.
+3. Gere o Homebrew e o winget com os hashes da Release: `node packaging/generate.mjs 1.x.y`. Os arquivos ficam em `packaging/out/`.
+4. Publique no npm: `cd npm && npm publish`.
+
+### Instalação manual
 
 Abra o DMG e arraste o Lezx Code para Aplicativos. O app tem assinatura ad-hoc, mas não é autenticado pela Apple. Se você baixar o DMG de outro computador, o macOS pode bloquear a primeira abertura: clique com o botão direito no app e escolha **Abrir**, ou rode `xattr -dr com.apple.quarantine "/Applications/Lezx Code.app"`.

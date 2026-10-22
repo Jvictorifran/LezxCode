@@ -489,6 +489,7 @@ function registerIpc() {
   ipcMain.handle('live:stop', async () => { await liveServer.stop(); send('live:status', { running: false }); });
   ipcMain.handle('live:status', () => liveServer.status());
 
+  ipcMain.handle('cli:install', () => installCli());
   ipcMain.handle('shell:openExternal', (_e, url) => shell.openExternal(url));
   ipcMain.handle('shell:reveal', (_e, p) => shell.showItemInFolder(path.normalize(p)));
   ipcMain.handle('shell:openPath', (_e, p) => shell.openPath(path.normalize(p)));
@@ -506,6 +507,33 @@ function registerIpc() {
     const menu = Menu.buildFromTemplate(build(items));
     menu.popup({ window: BrowserWindow.fromWebContents(e.sender), callback: () => setTimeout(() => resolve(chosen), 0) });
   }));
+}
+
+// ---------- comando "lezx" no terminal (como o "code" do VS Code) ----------
+async function installCli() {
+  const resources = app.isPackaged ? process.resourcesPath : path.join(APP_DIR, 'resources');
+  if (IS_WIN) {
+    // o instalador já faz isto; aqui serve para reparar o PATH
+    const script = path.join(resources, 'path.ps1');
+    const { execFileSync } = require('child_process');
+    execFileSync('powershell.exe', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', script, '-Dir', resources], { windowsHide: true });
+    return { ok: true, message: 'Comando "lezx" adicionado ao PATH. Abra um novo terminal para usar.' };
+  }
+  const source = path.join(resources, 'lezx');
+  // Homebrew (pasta do usuário, sem senha) ou /usr/local/bin (pede a senha de administrador)
+  for (const dir of ['/opt/homebrew/bin', '/usr/local/bin']) {
+    try {
+      fs.accessSync(dir, fs.constants.W_OK);
+      const target = path.join(dir, 'lezx');
+      try { fs.unlinkSync(target); } catch {}
+      fs.symlinkSync(source, target);
+      return { ok: true, message: `Comando "lezx" instalado em ${target}. Use "lezx ." em qualquer pasta.` };
+    } catch {}
+  }
+  const { execFile } = require('child_process');
+  const sh = `mkdir -p /usr/local/bin && ln -sf '${source.replace(/'/g, "'\\''")}' /usr/local/bin/lezx`;
+  await new Promise((resolve, reject) => execFile('osascript', ['-e', `do shell script "${sh.replace(/"/g, '\\"')}" with administrator privileges`], e => (e ? reject(new Error('Instalação cancelada')) : resolve())));
+  return { ok: true, message: 'Comando "lezx" instalado em /usr/local/bin/lezx. Use "lezx ." em qualquer pasta.' };
 }
 
 // ---------- menu ----------
@@ -526,6 +554,8 @@ function rebuildMenu() {
         { label: IS_MAC ? 'Tema de Cores… (⌘K ⌘T)' : 'Tema de Cores… (Ctrl+K Ctrl+T)', click: cmd('theme.pick') },
         { label: 'Tema de Ícones…', click: cmd('iconTheme.pick') },
         { label: 'Abrir pasta de temas', click: cmd('theme.openFolder') },
+        { type: 'separator' },
+        { label: 'Instalar o comando "lezx" no PATH', click: cmd('cli.install') },
         ...(IS_MAC ? [
           { type: 'separator' },
           { role: 'services' },
@@ -700,11 +730,11 @@ function createWindow() {
   win.on('closed', () => { win = null; });
 }
 
-// abrir pasta passada via linha de comando: open -a "Lezx Code" pasta
-let pendingOpen = null;
+// abrir pastas/arquivos vindos de fora: "lezx pasta", Finder (open-file) ou uma segunda instância
+let pendingOpen = [];
 app.on('open-file', (e, p) => {
   e.preventDefault();
-  if (win) openPath(p); else pendingOpen = p;
+  if (win) openPath(p); else pendingOpen.push(p);
 });
 
 function openPath(p) {
@@ -713,6 +743,21 @@ function openPath(p) {
     else send('file:openExternal', p);
   } catch {}
 }
+
+// argumentos da linha de comando que são caminhos existentes (ignora as flags do Chromium/Electron)
+function pathArgs(argv, cwd) {
+  const args = argv.slice(app.isPackaged ? 1 : 2).filter(a => a && !a.startsWith('-'));
+  return args.map(a => path.resolve(cwd || process.cwd(), a)).filter(a => fs.existsSync(a) && a !== path.resolve(APP_DIR));
+}
+
+// uma instância só: "lezx outra-pasta" com o app aberto abre na janela existente
+if (!app.requestSingleInstanceLock()) app.quit();
+app.on('second-instance', (_e, argv, cwd) => {
+  if (!win) return;
+  if (win.isMinimized()) win.restore();
+  win.focus();
+  for (const p of pathArgs(argv, cwd)) openPath(p);
+});
 
 app.whenReady().then(() => {
   protocol.handle('lezx', req => {
@@ -736,16 +781,15 @@ app.whenReady().then(() => {
   watchUserDirs();
   nativeTheme.themeSource = 'dark';
 
-  const argFolder = process.argv.slice(app.isPackaged ? 1 : 2).find(a => !a.startsWith('-') && fs.existsSync(a));
-  const startFolder = pendingOpen || argFolder || loadState().lastFolder;
-  if (startFolder && fs.existsSync(startFolder) && fs.statSync(startFolder).isDirectory()) setRoot(path.resolve(startFolder));
+  const opened = [...pendingOpen, ...pathArgs(process.argv)];
+  const isDir = p => { try { return fs.statSync(p).isDirectory(); } catch { return false; } };
+  const startFolder = opened.find(isDir) || loadState().lastFolder;
+  if (startFolder && isDir(startFolder)) setRoot(path.resolve(startFolder));
   else rebuildMenu();
 
   createWindow();
-  if (pendingOpen && !fs.statSync(pendingOpen).isDirectory()) {
-    const f = pendingOpen;
-    win.webContents.once('did-finish-load', () => setTimeout(() => send('file:openExternal', f), 600));
-  }
+  const files = opened.filter(p => !isDir(p));
+  if (files.length) win.webContents.once('did-finish-load', () => setTimeout(() => files.forEach(f => send('file:openExternal', f)), 600));
   app.on('activate', () => { if (!BrowserWindow.getAllWindows().length) createWindow(); });
 });
 

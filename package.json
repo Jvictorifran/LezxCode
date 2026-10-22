@@ -146,7 +146,17 @@
         "!node_modules/node-pty/prebuilds/darwin-*/**",
         "!node_modules/node-pty/prebuilds/win32-arm64/**"
       ],
-      "artifactName": "Lezx-Code-${version}-${arch}-setup.${ext}"
+      "artifactName": "Lezx-Code-${version}-${arch}-setup.${ext}",
+      "extraResources": [
+        {
+          "from": "resources/win/lezx.cmd",
+          "to": "lezx.cmd"
+        },
+        {
+          "from": "resources/win/path.ps1",
+          "to": "path.ps1"
+        }
+      ]
     },
     "nsis": {
       "oneClick": false,
@@ -158,7 +168,8 @@
         "pt_BR"
       ],
       "language": "1046",
-      "uninstallDisplayName": "Lezx Code"
+      "uninstallDisplayName": "Lezx Code",
+      "include": "build/installer.nsh"
     }
   },
   "repository": {

@@ -114,6 +114,7 @@ cmd('edit.undo', 'Editar: Desfazer', () => inEditor() ? ed.editor.trigger('menu'
 cmd('edit.redo', 'Editar: Refazer', () => inEditor() ? ed.editor.trigger('menu', 'redo') : document.execCommand('redo'), '⇧⌘Z', 'Editar');
 cmd('edit.find', 'Editar: Localizar', () => { if (ed.activeTab()?.kind === 'text') editorAction('actions.find')(); }, '⌘F', 'Editar');
 cmd('edit.replace', 'Editar: Substituir', editorAction('editor.action.startFindReplaceAction'), '⌥⌘F', 'Editar');
+cmd('cli.install', 'Terminal: Instalar o comando "lezx" no PATH', async () => { const r = await api.invoke('cli:install'); toast(r.message); }, null, 'Terminal');
 cmd('window.reload', 'Desenvolvedor: Recarregar janela', () => location.reload(), '⇧⌘R', 'Desenvolvedor');
 
 function runCommand(id, ...args) {
