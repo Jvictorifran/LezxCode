@@ -1,0 +1,42 @@
+// Tema de exemplo do Lezx Code — edite e salve: o tema se atualiza na hora.
+// Selecione com Cmd+Shift+P > "Tema de cores" (ou Cmd+K Cmd+T).
+// Você também pode colar aqui qualquer tema do VS Code (formato "colors" + "tokenColors").
+{
+  "name": "Meu Tema",
+  "type": "dark",              // "dark" ou "light"
+
+  // Cores da interface (mesmas chaves do VS Code). As que faltarem são calculadas a partir do editor.
+  "colors": {
+    "editor.background": "#1e1e2e",
+    "editor.foreground": "#cdd6f4",
+    "editorCursor.foreground": "#f5e0dc",
+    "editor.selectionBackground": "#45475a",
+    "editor.lineHighlightBackground": "#262637",
+    "sideBar.background": "#181825",
+    "activityBar.background": "#11111b",
+    "statusBar.background": "#11111b",
+    "tab.activeBorderTop": "#cba6f7",
+    "focusBorder": "#cba6f7",
+    "button.background": "#cba6f7",
+    "button.foreground": "#11111b",
+    "terminal.background": "#181825"
+  },
+
+  // Forma simplificada de colorir o código: "cor [italic] [bold] [underline]"
+  // chaves: comment, string, number, keyword, function, type, tag, attribute,
+  //         property, regexp, delimiter, variable, constant, operator
+  "tokens": {
+    "comment": "#6c7086 italic",
+    "string": "#a6e3a1",
+    "number": "#fab387",
+    "keyword": "#cba6f7",
+    "function": "#89b4fa",
+    "type": "#f9e2af",
+    "tag": "#f38ba8",
+    "attribute": "#f9e2af italic",
+    "property": "#94e2d5",
+    "delimiter": "#9399b2"
+  }
+
+  // Opcional: "tokenColors": [ { "scope": ["comment"], "settings": { "foreground": "#888", "fontStyle": "italic" } } ]
+}

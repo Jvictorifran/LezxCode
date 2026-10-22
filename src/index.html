@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' lezx:; script-src 'self' lezx:; style-src 'self' 'unsafe-inline' lezx:; img-src 'self' lezx: data: blob:; font-src 'self' lezx: data:; worker-src 'self' lezx: blob:; connect-src 'self' lezx:">
+  <title>Lezx Code</title>
+  <link rel="stylesheet" href="renderer.css">
+</head>
+<body>
+  <header id="titlebar"><span id="title">Lezx Code</span></header>
+
+  <div id="workbench">
+    <nav id="activitybar">
+      <button class="act active" data-view="explorer" title="Explorador (⇧⌘E)"><i class="codicon codicon-files"></i></button>
+      <button class="act" data-view="search" title="Pesquisar (⇧⌘F)"><i class="codicon codicon-search"></i></button>
+      <button class="act" data-view="extensions" title="Extensões (⇧⌘X)"><i class="codicon codicon-extensions"></i></button>
+      <button class="act" data-cmd="folder.open" title="Abrir pasta (⇧⌘O)"><i class="codicon codicon-folder-opened"></i></button>
+      <div class="spacer"></div>
+      <button class="act" id="act-themes" title="Temas"><i class="codicon codicon-symbol-color"></i></button>
+      <button class="act" id="act-settings" title="Configurações (⌘,)"><i class="codicon codicon-settings-gear"></i></button>
+    </nav>
+
+    <aside id="sidebar">
+      <section class="view" id="view-explorer">
+        <div class="view-header">
+          <span class="view-title" id="explorer-title">EXPLORADOR</span>
+          <div class="view-actions">
+            <button class="always" data-cmd="folder.open" title="Abrir outra pasta (⇧⌘O)"><i class="codicon codicon-folder-opened"></i></button>
+            <button data-action="newFile" title="Novo arquivo"><i class="codicon codicon-new-file"></i></button>
+            <button data-action="newFolder" title="Nova pasta"><i class="codicon codicon-new-folder"></i></button>
+            <button data-action="refresh" title="Atualizar"><i class="codicon codicon-refresh"></i></button>
+            <button data-action="collapse" title="Recolher tudo"><i class="codicon codicon-collapse-all"></i></button>
+          </div>
+        </div>
+        <div id="tree" tabindex="0"></div>
+        <div id="no-folder" class="empty-state">
+          <p>Nenhuma pasta aberta.</p>
+          <button class="btn" data-cmd="folder.open"><i class="codicon codicon-folder-opened"></i> Abrir pasta</button>
+          <p><a href="#" data-cmd="folder.recent">Abrir pasta recente…</a></p>
+        </div>
+      </section>
+
+      <section class="view" id="view-search" hidden>
+        <div class="view-header"><span class="view-title">PESQUISAR</span></div>
+        <div class="search-box">
+          <div class="input-wrap">
+            <input id="search-input" placeholder="Pesquisar" spellcheck="false">
+            <button class="toggle" id="search-case" title="Diferenciar maiúsculas">Aa</button>
+            <button class="toggle" id="search-word" title="Palavra inteira"><u>ab</u></button>
+            <button class="toggle" id="search-regex" title="Expressão regular">.*</button>
+          </div>
+          <div id="search-summary"></div>
+        </div>
+        <div id="search-results"></div>
+      </section>
+      <section class="view" id="view-extensions" hidden>
+        <div class="view-header">
+          <span class="view-title">EXTENSÕES</span>
+          <div class="view-actions">
+            <button class="always" data-action="example" title="Criar minha extensão"><i class="codicon codicon-add"></i></button>
+            <button class="always" data-action="folder" title="Abrir pasta das minhas extensões"><i class="codicon codicon-folder-opened"></i></button>
+            <button class="always" data-action="refresh" title="Atualizar"><i class="codicon codicon-refresh"></i></button>
+          </div>
+        </div>
+        <div class="search-box"><div class="input-wrap"><input id="ext-search" placeholder="Pesquisar extensões (ex.: php, python, c)" spellcheck="false"></div></div>
+        <div id="ext-list"></div>
+      </section>
+    </aside>
+    <div class="sash vertical" id="sash-sidebar"></div>
+
+    <main id="main">
+      <div id="tabs"></div>
+      <div id="editor-area">
+        <div id="editor"></div>
+        <div id="media-preview" hidden></div>
+        <div id="settings-view" hidden></div>
+        <div id="shortcuts-view" hidden></div>
+        <div id="welcome">
+          <div class="welcome-inner">
+            <div class="logo">⟨ <b>Lezx</b> Code ⟩</div>
+            <p class="tagline">Leve. Rápido. Feito para a web.</p>
+            <div class="welcome-actions">
+              <button class="btn" data-cmd="folder.open"><i class="codicon codicon-folder-opened"></i> Abrir pasta</button>
+              <button class="btn ghost" data-cmd="file.new"><i class="codicon codicon-new-file"></i> Novo arquivo</button>
+            </div>
+            <div id="welcome-recent" hidden>
+              <h3>Pastas recentes</h3>
+              <ul id="welcome-recent-list"></ul>
+            </div>
+            <table class="shortcuts">
+              <tr><td>Paleta de comandos</td><td><kbd>⇧⌘P</kbd></td></tr>
+              <tr><td>Abrir pasta</td><td><kbd>⇧⌘O</kbd></td></tr>
+              <tr><td>Ir para arquivo</td><td><kbd>⌘P</kbd></td></tr>
+              <tr><td>Configurações</td><td><kbd>⌘,</kbd></td></tr>
+              <tr><td>Terminal</td><td><kbd>⌃`</kbd> ou <kbd>⌘J</kbd></td></tr>
+              <tr><td>Go Live</td><td><kbd>⌥⌘L</kbd></td></tr>
+              <tr><td>Tema de cores</td><td><kbd>⌘K</kbd> <kbd>⌘T</kbd></td></tr>
+              <tr><td>Pesquisar nos arquivos</td><td><kbd>⇧⌘F</kbd></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="sash horizontal" id="sash-panel"></div>
+      <section id="panel" hidden>
+        <div class="panel-header">
+          <span class="panel-title">TERMINAL</span>
+          <div id="term-tabs"></div>
+          <div class="panel-actions">
+            <button id="term-new" title="Novo terminal"><i class="codicon codicon-add"></i></button>
+            <button id="term-kill" title="Encerrar terminal"><i class="codicon codicon-trash"></i></button>
+            <button id="term-max" title="Maximizar painel"><i class="codicon codicon-chevron-up"></i></button>
+            <button id="term-close" title="Fechar painel"><i class="codicon codicon-close"></i></button>
+          </div>
+        </div>
+        <div id="terminals"></div>
+      </section>
+    </main>
+  </div>
+
+  <footer id="statusbar">
+    <div class="left">
+      <span class="item" id="sb-branch" hidden><i class="codicon codicon-source-control"></i> <span></span></span>
+      <span class="item clickable" id="sb-problems" title="Problemas"><i class="codicon codicon-error"></i> <span id="sb-errors">0</span> <i class="codicon codicon-warning"></i> <span id="sb-warnings">0</span></span>
+    </div>
+    <div class="right">
+      <span class="item clickable" id="sb-cursor" hidden></span>
+      <span class="item clickable" id="sb-indent" hidden></span>
+      <span class="item" id="sb-encoding" hidden>UTF-8</span>
+      <span class="item clickable" id="sb-eol" hidden>LF</span>
+      <span class="item clickable" id="sb-lang" hidden></span>
+      <span class="item clickable live" id="sb-live" title="Iniciar Live Server"><i class="codicon codicon-broadcast"></i> <span>Go Live</span></span>
+    </div>
+  </footer>
+
+  <div id="palette" hidden>
+    <div class="palette-box">
+      <input id="palette-input" spellcheck="false" autocomplete="off">
+      <div id="palette-list"></div>
+    </div>
+  </div>
+  <div id="toasts"></div>
+
+  <script type="module" src="renderer.js"></script>
+</body>
+</html>

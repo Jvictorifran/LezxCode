@@ -1,0 +1,86 @@
+{
+  "name": "Lezx Minimal",
+  "type": "icons",
+  "iconDefinitions": {
+    "file": {
+      "codicon": "file"
+    },
+    "folder": {
+      "codicon": "folder"
+    },
+    "folderOpen": {
+      "codicon": "folder-opened"
+    },
+    "code": {
+      "codicon": "file-code"
+    },
+    "media": {
+      "codicon": "file-media"
+    },
+    "json": {
+      "codicon": "json"
+    },
+    "md": {
+      "codicon": "markdown"
+    },
+    "zip": {
+      "codicon": "file-zip"
+    },
+    "pdf": {
+      "codicon": "file-pdf"
+    },
+    "gear": {
+      "codicon": "gear"
+    },
+    "git": {
+      "codicon": "source-control"
+    }
+  },
+  "file": "file",
+  "folder": "folder",
+  "folderExpanded": "folderOpen",
+  "fileExtensions": {
+    "html": "code",
+    "htm": "code",
+    "css": "code",
+    "scss": "code",
+    "less": "code",
+    "js": "code",
+    "mjs": "code",
+    "cjs": "code",
+    "ts": "code",
+    "jsx": "code",
+    "tsx": "code",
+    "php": "code",
+    "py": "code",
+    "vue": "code",
+    "svelte": "code",
+    "c": "code",
+    "h": "code",
+    "cpp": "code",
+    "sh": "code",
+    "xml": "code",
+    "java": "code",
+    "go": "code",
+    "rs": "code",
+    "rb": "code",
+    "sql": "code",
+    "png": "media",
+    "jpg": "media",
+    "jpeg": "media",
+    "gif": "media",
+    "svg": "media",
+    "webp": "media",
+    "json": "json",
+    "md": "md",
+    "zip": "zip",
+    "pdf": "pdf",
+    "yml": "gear",
+    "yaml": "gear",
+    "env": "gear",
+    "toml": "gear"
+  },
+  "fileNames": {
+    ".gitignore": "git"
+  }
+}

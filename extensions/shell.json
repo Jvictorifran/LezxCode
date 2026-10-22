@@ -1,0 +1,50 @@
+{
+  "name": "Shell (Bash/Zsh)",
+  "publisher": "Lezx",
+  "version": "1.0.0",
+  "icon": {
+    "text": "$",
+    "color": "#89e051"
+  },
+  "description": "Erros, documentação dos comandos e autocompletar para scripts .sh com o bash-language-server (baixado via npm).",
+  "languages": [
+    "shell"
+  ],
+  "server": {
+    "npm": "bash-language-server",
+    "command": "bash-language-server",
+    "args": [
+      "start"
+    ]
+  },
+  "snippets": {
+    "shebang": {
+      "prefix": "shebang",
+      "body": [
+        "#!/usr/bin/env bash",
+        "set -euo pipefail",
+        "",
+        "$0"
+      ],
+      "description": "Cabeçalho de script"
+    },
+    "if": {
+      "prefix": "if",
+      "body": [
+        "if [[ ${1:condicao} ]]; then",
+        "\t$0",
+        "fi"
+      ],
+      "description": "if"
+    },
+    "for": {
+      "prefix": "for",
+      "body": [
+        "for ${1:item} in ${2:lista}; do",
+        "\t$0",
+        "done"
+      ],
+      "description": "for"
+    }
+  }
+}

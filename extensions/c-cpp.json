@@ -1,0 +1,301 @@
+{
+  "name": "C/C++",
+  "publisher": "Lezx",
+  "version": "1.0.0",
+  "icon": {
+    "text": "C",
+    "color": "#5c9fd8"
+  },
+  "description": "Erros em tempo real, autocompletar inteligente, ir para definição, formatação e correções rápidas com o clangd (vem com as ferramentas de linha de comando da Apple).",
+  "languages": [
+    "c",
+    "cpp"
+  ],
+  "server": {
+    "command": "clangd",
+    "args": [
+      "--background-index",
+      "--header-insertion=iwyu",
+      "--completion-style=detailed",
+      "--function-arg-placeholders=0",
+      "--fallback-style={BasedOnStyle: LLVM, IndentWidth: 4}"
+    ],
+    "installHint": "xcode-select --install"
+  },
+  "keywords": [
+    "auto",
+    "break",
+    "case",
+    "char",
+    "const",
+    "continue",
+    "default",
+    "do",
+    "double",
+    "else",
+    "enum",
+    "extern",
+    "float",
+    "for",
+    "goto",
+    "if",
+    "inline",
+    "int",
+    "long",
+    "register",
+    "restrict",
+    "return",
+    "short",
+    "signed",
+    "sizeof",
+    "static",
+    "struct",
+    "switch",
+    "typedef",
+    "union",
+    "unsigned",
+    "void",
+    "volatile",
+    "while",
+    "bool",
+    "true",
+    "false",
+    "NULL"
+  ],
+  "functions": [
+    {
+      "label": "printf",
+      "insert": "printf(\"${1:%d}\\n\"${2:, ${3:valor}});",
+      "detail": "int printf(const char *formato, ...)",
+      "doc": "Escreve texto formatado na saída padrão."
+    },
+    {
+      "label": "scanf",
+      "insert": "scanf(\"${1:%d}\", &${2:variavel});",
+      "detail": "int scanf(const char *formato, ...)",
+      "doc": "Lê dados formatados da entrada padrão."
+    },
+    {
+      "label": "puts",
+      "insert": "puts(\"$1\");"
+    },
+    {
+      "label": "putchar",
+      "insert": "putchar($1);"
+    },
+    {
+      "label": "getchar",
+      "insert": "getchar()"
+    },
+    {
+      "label": "fgets",
+      "insert": "fgets(${1:buffer}, sizeof(${1:buffer}), stdin);"
+    },
+    {
+      "label": "malloc",
+      "insert": "(${1:int} *) malloc(${2:n} * sizeof(${1:int}))",
+      "detail": "void *malloc(size_t tamanho)",
+      "doc": "Aloca memória no heap."
+    },
+    {
+      "label": "calloc",
+      "insert": "calloc(${1:n}, sizeof(${2:int}))"
+    },
+    {
+      "label": "realloc",
+      "insert": "realloc(${1:ptr}, ${2:tamanho})"
+    },
+    {
+      "label": "free",
+      "insert": "free(${1:ptr});"
+    },
+    {
+      "label": "strlen",
+      "insert": "strlen(${1:str})"
+    },
+    {
+      "label": "strcpy",
+      "insert": "strcpy(${1:destino}, ${2:origem});"
+    },
+    {
+      "label": "strcmp",
+      "insert": "strcmp(${1:a}, ${2:b})"
+    },
+    {
+      "label": "strcat",
+      "insert": "strcat(${1:destino}, ${2:origem});"
+    },
+    {
+      "label": "memset",
+      "insert": "memset(${1:ptr}, ${2:0}, ${3:tamanho});"
+    },
+    {
+      "label": "memcpy",
+      "insert": "memcpy(${1:destino}, ${2:origem}, ${3:tamanho});"
+    },
+    {
+      "label": "fopen",
+      "insert": "fopen(\"${1:arquivo.txt}\", \"${2:r}\")"
+    },
+    {
+      "label": "fclose",
+      "insert": "fclose(${1:arquivo});"
+    },
+    {
+      "label": "fprintf",
+      "insert": "fprintf(${1:arquivo}, \"$2\\n\");"
+    },
+    {
+      "label": "exit",
+      "insert": "exit(${1:0});"
+    },
+    {
+      "label": "rand",
+      "insert": "rand()"
+    },
+    {
+      "label": "srand",
+      "insert": "srand(time(NULL));"
+    },
+    {
+      "label": "abs",
+      "insert": "abs($1)"
+    },
+    {
+      "label": "sqrt",
+      "insert": "sqrt($1)"
+    },
+    {
+      "label": "pow",
+      "insert": "pow(${1:base}, ${2:expoente})"
+    }
+  ],
+  "snippets": {
+    "main": {
+      "prefix": "main",
+      "body": [
+        "#include <stdio.h>",
+        "",
+        "int main(void) {",
+        "\t$0",
+        "\treturn 0;",
+        "}"
+      ],
+      "description": "Programa com função main"
+    },
+    "inc": {
+      "prefix": "inc",
+      "body": [
+        "#include <${1:stdio.h}>"
+      ],
+      "description": "#include <...>"
+    },
+    "incl": {
+      "prefix": "incl",
+      "body": [
+        "#include \"${1:arquivo.h}\""
+      ],
+      "description": "#include \"...\""
+    },
+    "for": {
+      "prefix": "for",
+      "body": [
+        "for (int ${1:i} = 0; ${1:i} < ${2:n}; ${1:i}++) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "Laço for"
+    },
+    "while": {
+      "prefix": "while",
+      "body": [
+        "while (${1:condicao}) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "Laço while"
+    },
+    "do": {
+      "prefix": "do",
+      "body": [
+        "do {",
+        "\t$0",
+        "} while (${1:condicao});"
+      ],
+      "description": "Laço do-while"
+    },
+    "if": {
+      "prefix": "if",
+      "body": [
+        "if (${1:condicao}) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "if"
+    },
+    "ife": {
+      "prefix": "ife",
+      "body": [
+        "if (${1:condicao}) {",
+        "\t$2",
+        "} else {",
+        "\t$0",
+        "}"
+      ],
+      "description": "if / else"
+    },
+    "switch": {
+      "prefix": "switch",
+      "body": [
+        "switch (${1:valor}) {",
+        "\tcase ${2:1}:",
+        "\t\t$0",
+        "\t\tbreak;",
+        "\tdefault:",
+        "\t\tbreak;",
+        "}"
+      ],
+      "description": "switch"
+    },
+    "struct": {
+      "prefix": "struct",
+      "body": [
+        "typedef struct ${1:Nome} {",
+        "\t${2:int campo};",
+        "} ${1:Nome};"
+      ],
+      "description": "typedef struct"
+    },
+    "node": {
+      "prefix": "node",
+      "body": [
+        "typedef struct No {",
+        "\t${1:int} valor;",
+        "\tstruct No *prox;",
+        "} No;"
+      ],
+      "description": "Nó de lista encadeada"
+    },
+    "func": {
+      "prefix": "func",
+      "body": [
+        "${1:int} ${2:nome}(${3:void}) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "Função"
+    },
+    "guard": {
+      "prefix": "guard",
+      "body": [
+        "#ifndef ${1:ARQUIVO_H}",
+        "#define ${1:ARQUIVO_H}",
+        "",
+        "$0",
+        "",
+        "#endif"
+      ],
+      "description": "Include guard (.h)"
+    }
+  }
+}

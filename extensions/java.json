@@ -1,0 +1,102 @@
+{
+  "name": "Java",
+  "publisher": "Lezx",
+  "version": "1.0.0",
+  "icon": {
+    "text": "J",
+    "color": "#e76f00"
+  },
+  "description": "Snippets e autocompletar de palavras-chave para Java (sem servidor de linguagem).",
+  "languages": [
+    "java"
+  ],
+  "keywords": [
+    "abstract",
+    "boolean",
+    "break",
+    "byte",
+    "case",
+    "catch",
+    "char",
+    "class",
+    "continue",
+    "default",
+    "do",
+    "double",
+    "else",
+    "enum",
+    "extends",
+    "final",
+    "finally",
+    "float",
+    "for",
+    "if",
+    "implements",
+    "import",
+    "instanceof",
+    "int",
+    "interface",
+    "long",
+    "new",
+    "package",
+    "private",
+    "protected",
+    "public",
+    "return",
+    "short",
+    "static",
+    "super",
+    "switch",
+    "this",
+    "throw",
+    "throws",
+    "try",
+    "void",
+    "while",
+    "var",
+    "null",
+    "true",
+    "false",
+    "String"
+  ],
+  "functions": [
+    {
+      "label": "sout",
+      "insert": "System.out.println(${1});",
+      "detail": "System.out.println"
+    },
+    {
+      "label": "souf",
+      "insert": "System.out.printf(\"${1}%n\", ${2});"
+    }
+  ],
+  "snippets": {
+    "main": {
+      "prefix": "main",
+      "body": [
+        "public static void main(String[] args) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "main"
+    },
+    "class": {
+      "prefix": "class",
+      "body": [
+        "public class ${1:Nome} {",
+        "\t$0",
+        "}"
+      ],
+      "description": "Classe"
+    },
+    "fori": {
+      "prefix": "fori",
+      "body": [
+        "for (int ${1:i} = 0; ${1:i} < ${2:n}; ${1:i}++) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "for"
+    }
+  }
+}

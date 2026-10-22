@@ -1,0 +1,122 @@
+{
+  "name": "lezx-code",
+  "version": "1.3.0",
+  "description": "Lezx Code — IDE leve para desenvolvimento web, inspirada no VS Code",
+  "main": "main.js",
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node build.mjs && electron .",
+    "dev": "electron .",
+    "postinstall": "chmod +x node_modules/node-pty/prebuilds/*/spawn-helper 2>/dev/null || true",
+    "dist": "node build.mjs && electron-builder --mac dmg --arm64",
+    "dist:universal": "node build.mjs && electron-builder --mac dmg --universal"
+  },
+  "author": "Joao Victor Ifran",
+  "license": "MIT",
+  "dependencies": {
+    "node-pty": "^1.1.0"
+  },
+  "devDependencies": {
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/addon-web-links": "^0.12.0",
+    "@xterm/xterm": "^6.0.0",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.15.3",
+    "emmet-monaco-es": "^5.7.0",
+    "esbuild": "^0.28.2",
+    "monaco-editor": "^0.57.0"
+  },
+  "productName": "Lezx Code",
+  "build": {
+    "appId": "com.lezx.code",
+    "productName": "Lezx Code",
+    "copyright": "MIT",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "live-server.js",
+      "fonts.js",
+      "extensions/**",
+      "translations/**",
+      "extensions.js",
+      "lsp.js",
+      "dist/**",
+      "themes/**",
+      "icon-themes/**",
+      "examples/**",
+      "package.json",
+      "!node_modules/node-pty/{src,deps,scripts,typings,binding.gyp,third_party}/**",
+      "!node_modules/node-pty/prebuilds/win32-*/**",
+      "!node_modules/node-pty/lib/*.test.js",
+      "!node_modules/node-pty/lib/*.map"
+    ],
+    "asarUnpack": [
+      "node_modules/node-pty/**"
+    ],
+    "electronLanguages": [
+      "en",
+      "pt-BR",
+      "pt"
+    ],
+    "compression": "maximum",
+    "npmRebuild": false,
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icon.icns",
+      "target": [
+        "dmg"
+      ],
+      "identity": null,
+      "darkModeSupport": true,
+      "extendInfo": {
+        "CFBundleDocumentTypes": [
+          {
+            "CFBundleTypeName": "Folder",
+            "CFBundleTypeRole": "Editor",
+            "LSItemContentTypes": [
+              "public.folder"
+            ]
+          },
+          {
+            "CFBundleTypeName": "Source",
+            "CFBundleTypeRole": "Editor",
+            "LSHandlerRank": "Alternate",
+            "LSItemContentTypes": [
+              "public.source-code",
+              "public.plain-text",
+              "public.html",
+              "public.json",
+              "public.css",
+              "com.netscape.javascript-source"
+            ]
+          }
+        ]
+      },
+      "x64ArchFiles": "Contents/Resources/app.asar.unpacked/node_modules/node-pty/prebuilds/**"
+    },
+    "dmg": {
+      "title": "Lezx Code",
+      "contents": [
+        {
+          "x": 150,
+          "y": 190
+        },
+        {
+          "x": 390,
+          "y": 190,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "afterPack": "build/after-pack.js"
+  }
+}

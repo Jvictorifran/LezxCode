@@ -1,0 +1,596 @@
+{
+  "name": "Lezx Icons",
+  "type": "icons",
+  "iconDefinitions": {
+    "file": {
+      "codicon": "file",
+      "color": "#8a90a2"
+    },
+    "folder": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#7c8aa5\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folderOpen": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#7c8aa5\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#7c8aa5\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "html": {
+      "text": "<>",
+      "color": "#e44d26"
+    },
+    "css": {
+      "text": "#",
+      "color": "#42a5f5"
+    },
+    "scss": {
+      "text": "#",
+      "color": "#cd6799"
+    },
+    "less": {
+      "text": "#",
+      "color": "#5b7fbf"
+    },
+    "js": {
+      "text": "JS",
+      "color": "#f0d43a"
+    },
+    "ts": {
+      "text": "TS",
+      "color": "#3b82f6"
+    },
+    "react": {
+      "codicon": "symbol-misc",
+      "color": "#61dafb"
+    },
+    "reactts": {
+      "codicon": "symbol-misc",
+      "color": "#3b82f6"
+    },
+    "json": {
+      "text": "{}",
+      "color": "#f2c14e"
+    },
+    "md": {
+      "text": "M↓",
+      "color": "#4aa3df"
+    },
+    "image": {
+      "codicon": "file-media",
+      "color": "#b083f0"
+    },
+    "svg": {
+      "codicon": "symbol-color",
+      "color": "#ffb13b"
+    },
+    "php": {
+      "text": "php",
+      "color": "#8892bf"
+    },
+    "py": {
+      "text": "py",
+      "color": "#4b8bbe"
+    },
+    "vue": {
+      "text": "V",
+      "color": "#41b883"
+    },
+    "svelte": {
+      "text": "S",
+      "color": "#ff3e00"
+    },
+    "c": {
+      "text": "C",
+      "color": "#5c9fd8"
+    },
+    "h": {
+      "text": "h",
+      "color": "#a074c4"
+    },
+    "cpp": {
+      "text": "C+",
+      "color": "#f34b7d"
+    },
+    "sh": {
+      "text": "$",
+      "color": "#89e051"
+    },
+    "yaml": {
+      "text": "Y",
+      "color": "#e06c75"
+    },
+    "xml": {
+      "text": "<>",
+      "color": "#e37933"
+    },
+    "env": {
+      "codicon": "gear",
+      "color": "#e5c07b"
+    },
+    "lock": {
+      "codicon": "lock",
+      "color": "#8a90a2"
+    },
+    "git": {
+      "codicon": "source-control",
+      "color": "#f14e32"
+    },
+    "npm": {
+      "codicon": "package",
+      "color": "#e8474e"
+    },
+    "readme": {
+      "codicon": "info",
+      "color": "#4aa3df"
+    },
+    "font": {
+      "text": "Aa",
+      "color": "#e06c75"
+    },
+    "sql": {
+      "codicon": "database",
+      "color": "#dfb94b"
+    },
+    "txt": {
+      "codicon": "note",
+      "color": "#8a90a2"
+    },
+    "java": {
+      "text": "J",
+      "color": "#e76f00"
+    },
+    "go": {
+      "text": "go",
+      "color": "#00add8"
+    },
+    "rs": {
+      "text": "rs",
+      "color": "#dea584"
+    },
+    "rb": {
+      "text": "rb",
+      "color": "#cc342d"
+    },
+    "pdf": {
+      "codicon": "file-pdf",
+      "color": "#e5534b"
+    },
+    "zip": {
+      "codicon": "file-zip",
+      "color": "#b0a46b"
+    },
+    "video": {
+      "codicon": "device-camera-video",
+      "color": "#ff7aa2"
+    },
+    "audio": {
+      "codicon": "unmute",
+      "color": "#ff7aa2"
+    },
+    "config": {
+      "codicon": "settings-gear",
+      "color": "#6d8086"
+    },
+    "license": {
+      "codicon": "law",
+      "color": "#d4b04c"
+    },
+    "docker": {
+      "codicon": "vm",
+      "color": "#2496ed"
+    },
+    "vite": {
+      "codicon": "zap",
+      "color": "#bd34fe"
+    },
+    "tailwind": {
+      "codicon": "symbol-color",
+      "color": "#38bdf8"
+    },
+    "twig": {
+      "text": "tw",
+      "color": "#9bc04a"
+    },
+    "blade": {
+      "text": "b",
+      "color": "#ff2d20"
+    },
+    "ico": {
+      "codicon": "star-full",
+      "color": "#f0d43a"
+    },
+    "folder_src": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#4caf7d\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_src_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#4caf7d\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#4caf7d\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_source": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#4caf7d\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_source_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#4caf7d\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#4caf7d\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_public": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#29b6f6\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_public_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#29b6f6\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#29b6f6\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_assets": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffb74d\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_assets_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffb74d\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ffb74d\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_components": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ab8cff\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_components_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ab8cff\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ab8cff\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_pages": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ef6c8f\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_pages_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ef6c8f\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ef6c8f\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_styles": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#42a5f5\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_styles_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#42a5f5\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#42a5f5\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_css": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#42a5f5\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_css_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#42a5f5\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#42a5f5\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_scss": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#cd6799\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_scss_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#cd6799\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#cd6799\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_js": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#f0d43a\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_js_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#f0d43a\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#f0d43a\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_scripts": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#f0d43a\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_scripts_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#f0d43a\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#f0d43a\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_img": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#b083f0\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_img_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#b083f0\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#b083f0\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_images": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#b083f0\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_images_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#b083f0\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#b083f0\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_icons": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#b083f0\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_icons_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#b083f0\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#b083f0\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_fonts": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#e06c75\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_fonts_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#e06c75\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#e06c75\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_node_modules": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#5a7d5a\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_node_modules_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#5a7d5a\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#5a7d5a\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_dist": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#e57373\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_dist_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#e57373\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#e57373\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_build": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#e57373\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_build_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#e57373\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#e57373\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_git": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#f14e32\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_git_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#f14e32\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#f14e32\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_github": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#8a90a2\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_github_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#8a90a2\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#8a90a2\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_vscode": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#3b82f6\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_vscode_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#3b82f6\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#3b82f6\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_test": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffca28\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_test_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffca28\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ffca28\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_tests": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffca28\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_tests_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffca28\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ffca28\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder___tests__": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffca28\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder___tests___open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffca28\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ffca28\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_lib": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#26a69a\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_lib_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#26a69a\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#26a69a\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_utils": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#26a69a\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_utils_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#26a69a\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#26a69a\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_config": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#6d8086\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_config_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#6d8086\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#6d8086\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_api": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ff8a65\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_api_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ff8a65\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ff8a65\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_views": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ef6c8f\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_views_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ef6c8f\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ef6c8f\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_routes": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ff8a65\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_routes_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ff8a65\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ff8a65\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_hooks": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ab8cff\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_hooks_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ab8cff\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ab8cff\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_app": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#4caf7d\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_app_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#4caf7d\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#4caf7d\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_resources": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffb74d\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_resources_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ffb74d\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ffb74d\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_database": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#dfb94b\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_database_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#dfb94b\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#dfb94b\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_docs": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#4aa3df\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_docs_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#4aa3df\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#4aa3df\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    },
+    "folder_layouts": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ef6c8f\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z\"/></svg>"
+    },
+    "folder_layouts_open": {
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path fill=\"#ef6c8f\" opacity=\".55\" d=\"M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v1H2z\"/><path fill=\"#ef6c8f\" d=\"M1.2 10.6A1.5 1.5 0 0 1 2.7 9h18.6a1.5 1.5 0 0 1 1.5 1.7l-1.1 7.6A2 2 0 0 1 19.7 20H4.3a2 2 0 0 1-2-1.7z\"/></svg>"
+    }
+  },
+  "file": "file",
+  "folder": "folder",
+  "folderExpanded": "folderOpen",
+  "fileExtensions": {
+    "html": "html",
+    "htm": "html",
+    "css": "css",
+    "scss": "scss",
+    "sass": "scss",
+    "less": "less",
+    "js": "js",
+    "mjs": "js",
+    "cjs": "js",
+    "ts": "ts",
+    "mts": "ts",
+    "jsx": "react",
+    "tsx": "reactts",
+    "json": "json",
+    "jsonc": "json",
+    "md": "md",
+    "mdx": "md",
+    "png": "image",
+    "jpg": "image",
+    "jpeg": "image",
+    "gif": "image",
+    "webp": "image",
+    "avif": "image",
+    "bmp": "image",
+    "ico": "ico",
+    "svg": "svg",
+    "php": "php",
+    "py": "py",
+    "vue": "vue",
+    "svelte": "svelte",
+    "c": "c",
+    "h": "h",
+    "cpp": "cpp",
+    "cc": "cpp",
+    "hpp": "h",
+    "sh": "sh",
+    "zsh": "sh",
+    "bash": "sh",
+    "yml": "yaml",
+    "yaml": "yaml",
+    "xml": "xml",
+    "env": "env",
+    "lock": "lock",
+    "sql": "sql",
+    "txt": "txt",
+    "java": "java",
+    "go": "go",
+    "rs": "rs",
+    "rb": "rb",
+    "pdf": "pdf",
+    "zip": "zip",
+    "gz": "zip",
+    "rar": "zip",
+    "mp4": "video",
+    "webm": "video",
+    "mov": "video",
+    "mp3": "audio",
+    "wav": "audio",
+    "ogg": "audio",
+    "woff": "font",
+    "woff2": "font",
+    "ttf": "font",
+    "otf": "font",
+    "toml": "config",
+    "ini": "config",
+    "twig": "twig",
+    "blade.php": "blade",
+    "d.ts": "ts",
+    "test.js": "js",
+    "spec.ts": "ts"
+  },
+  "fileNames": {
+    "package.json": "npm",
+    "package-lock.json": "npm",
+    "yarn.lock": "lock",
+    "pnpm-lock.yaml": "lock",
+    ".gitignore": "git",
+    ".gitattributes": "git",
+    ".gitmodules": "git",
+    "readme.md": "readme",
+    "license": "license",
+    "license.md": "license",
+    ".env": "env",
+    ".env.local": "env",
+    ".env.example": "env",
+    "dockerfile": "docker",
+    "docker-compose.yml": "docker",
+    "vite.config.js": "vite",
+    "vite.config.ts": "vite",
+    "tailwind.config.js": "tailwind",
+    "tailwind.config.ts": "tailwind",
+    "tsconfig.json": "config",
+    "jsconfig.json": "config",
+    ".editorconfig": "config",
+    ".prettierrc": "config",
+    ".eslintrc.json": "config",
+    "eslint.config.js": "config",
+    "composer.json": "php",
+    "artisan": "php"
+  },
+  "folderNames": {
+    "src": "folder_src",
+    "source": "folder_source",
+    "public": "folder_public",
+    "assets": "folder_assets",
+    "components": "folder_components",
+    "pages": "folder_pages",
+    "styles": "folder_styles",
+    "css": "folder_css",
+    "scss": "folder_scss",
+    "js": "folder_js",
+    "scripts": "folder_scripts",
+    "img": "folder_img",
+    "images": "folder_images",
+    "icons": "folder_icons",
+    "fonts": "folder_fonts",
+    "node_modules": "folder_node_modules",
+    "dist": "folder_dist",
+    "build": "folder_build",
+    ".git": "folder_git",
+    ".github": "folder_github",
+    ".vscode": "folder_vscode",
+    "test": "folder_test",
+    "tests": "folder_tests",
+    "__tests__": "folder___tests__",
+    "lib": "folder_lib",
+    "utils": "folder_utils",
+    "config": "folder_config",
+    "api": "folder_api",
+    "views": "folder_views",
+    "routes": "folder_routes",
+    "hooks": "folder_hooks",
+    "app": "folder_app",
+    "resources": "folder_resources",
+    "database": "folder_database",
+    "docs": "folder_docs",
+    "layouts": "folder_layouts"
+  },
+  "folderNamesExpanded": {
+    "src": "folder_src_open",
+    "source": "folder_source_open",
+    "public": "folder_public_open",
+    "assets": "folder_assets_open",
+    "components": "folder_components_open",
+    "pages": "folder_pages_open",
+    "styles": "folder_styles_open",
+    "css": "folder_css_open",
+    "scss": "folder_scss_open",
+    "js": "folder_js_open",
+    "scripts": "folder_scripts_open",
+    "img": "folder_img_open",
+    "images": "folder_images_open",
+    "icons": "folder_icons_open",
+    "fonts": "folder_fonts_open",
+    "node_modules": "folder_node_modules_open",
+    "dist": "folder_dist_open",
+    "build": "folder_build_open",
+    ".git": "folder_git_open",
+    ".github": "folder_github_open",
+    ".vscode": "folder_vscode_open",
+    "test": "folder_test_open",
+    "tests": "folder_tests_open",
+    "__tests__": "folder___tests___open",
+    "lib": "folder_lib_open",
+    "utils": "folder_utils_open",
+    "config": "folder_config_open",
+    "api": "folder_api_open",
+    "views": "folder_views_open",
+    "routes": "folder_routes_open",
+    "hooks": "folder_hooks_open",
+    "app": "folder_app_open",
+    "resources": "folder_resources_open",
+    "database": "folder_database_open",
+    "docs": "folder_docs_open",
+    "layouts": "folder_layouts_open"
+  }
+}

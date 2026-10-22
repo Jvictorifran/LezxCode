@@ -1,0 +1,27 @@
+// Tema de ícones de exemplo. Selecione com Cmd+Shift+P > "Tema de ícones".
+// Cada ícone em "iconDefinitions" pode ser:
+//   { "text": "JS", "color": "#f0d43a" }                  -> texto colorido (estilo Seti)
+//   { "codicon": "file-code", "color": "#61dafb" }        -> ícone nativo do VS Code (https://microsoft.github.io/vscode-codicons/dist/codicon.html)
+//   { "svg": "<svg ...>...</svg>" }                         -> SVG embutido
+//   { "iconPath": "./meus-svgs/react.svg" }                 -> arquivo .svg/.png relativo a este JSON
+{
+  "name": "Meus Ícones",
+  "iconDefinitions": {
+    "arquivo":      { "codicon": "file", "color": "#9399b2" },
+    "pasta":        { "codicon": "folder", "color": "#89b4fa" },
+    "pastaAberta":  { "codicon": "folder-opened", "color": "#89b4fa" },
+    "html":         { "text": "<>", "color": "#fab387" },
+    "css":          { "text": "#", "color": "#89dceb" },
+    "js":           { "text": "JS", "color": "#f9e2af" },
+    "json":         { "text": "{}", "color": "#f9e2af" },
+    "npm":          { "codicon": "package", "color": "#f38ba8" },
+    "pastaSrc":     { "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='#a6e3a1' d='M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z'/></svg>" }
+  },
+  "file": "arquivo",
+  "folder": "pasta",
+  "folderExpanded": "pastaAberta",
+  "fileExtensions": { "html": "html", "css": "css", "js": "js", "json": "json" },
+  "fileNames": { "package.json": "npm" },
+  "folderNames": { "src": "pastaSrc" },
+  "folderNamesExpanded": { "src": "pastaSrc" }
+}

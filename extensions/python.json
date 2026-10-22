@@ -1,0 +1,274 @@
+{
+  "name": "Python",
+  "publisher": "Lezx",
+  "version": "1.0.0",
+  "icon": {
+    "text": "py",
+    "color": "#4b8bbe"
+  },
+  "description": "Erros e autocompletar inteligente com o Pyright (baixado via npm na instalação). Sem ele, os erros de sintaxe continuam sendo mostrados usando o python3.",
+  "languages": [
+    "python"
+  ],
+  "server": {
+    "npm": "pyright",
+    "command": "pyright-langserver",
+    "args": [
+      "--stdio"
+    ]
+  },
+  "linter": "python",
+  "keywords": [
+    "False",
+    "None",
+    "True",
+    "and",
+    "as",
+    "assert",
+    "async",
+    "await",
+    "break",
+    "class",
+    "continue",
+    "def",
+    "del",
+    "elif",
+    "else",
+    "except",
+    "finally",
+    "for",
+    "from",
+    "global",
+    "if",
+    "import",
+    "in",
+    "is",
+    "lambda",
+    "match",
+    "case",
+    "nonlocal",
+    "not",
+    "or",
+    "pass",
+    "raise",
+    "return",
+    "try",
+    "while",
+    "with",
+    "yield",
+    "self"
+  ],
+  "functions": [
+    {
+      "label": "print",
+      "insert": "print(${1})",
+      "detail": "print(*valores, sep=' ', end='\\n')",
+      "doc": "Mostra valores na saída."
+    },
+    {
+      "label": "input",
+      "insert": "input(\"${1:Digite: }\")",
+      "detail": "input(mensagem)",
+      "doc": "Lê um texto digitado."
+    },
+    {
+      "label": "len",
+      "insert": "len(${1})"
+    },
+    {
+      "label": "range",
+      "insert": "range(${1:n})"
+    },
+    {
+      "label": "int",
+      "insert": "int(${1})"
+    },
+    {
+      "label": "float",
+      "insert": "float(${1})"
+    },
+    {
+      "label": "str",
+      "insert": "str(${1})"
+    },
+    {
+      "label": "bool",
+      "insert": "bool(${1})"
+    },
+    {
+      "label": "list",
+      "insert": "list(${1})"
+    },
+    {
+      "label": "dict",
+      "insert": "dict(${1})"
+    },
+    {
+      "label": "set",
+      "insert": "set(${1})"
+    },
+    {
+      "label": "tuple",
+      "insert": "tuple(${1})"
+    },
+    {
+      "label": "open",
+      "insert": "open(\"${1:arquivo.txt}\", \"${2:r}\", encoding=\"utf-8\")"
+    },
+    {
+      "label": "enumerate",
+      "insert": "enumerate(${1})"
+    },
+    {
+      "label": "zip",
+      "insert": "zip(${1}, ${2})"
+    },
+    {
+      "label": "map",
+      "insert": "map(${1:funcao}, ${2:iteravel})"
+    },
+    {
+      "label": "filter",
+      "insert": "filter(${1:funcao}, ${2:iteravel})"
+    },
+    {
+      "label": "sorted",
+      "insert": "sorted(${1})"
+    },
+    {
+      "label": "reversed",
+      "insert": "reversed(${1})"
+    },
+    {
+      "label": "sum",
+      "insert": "sum(${1})"
+    },
+    {
+      "label": "min",
+      "insert": "min(${1})"
+    },
+    {
+      "label": "max",
+      "insert": "max(${1})"
+    },
+    {
+      "label": "abs",
+      "insert": "abs(${1})"
+    },
+    {
+      "label": "round",
+      "insert": "round(${1}, ${2:2})"
+    },
+    {
+      "label": "type",
+      "insert": "type(${1})"
+    },
+    {
+      "label": "isinstance",
+      "insert": "isinstance(${1:obj}, ${2:tipo})"
+    },
+    {
+      "label": "super",
+      "insert": "super().__init__(${1})"
+    },
+    {
+      "label": "any",
+      "insert": "any(${1})"
+    },
+    {
+      "label": "all",
+      "insert": "all(${1})"
+    },
+    {
+      "label": "format",
+      "insert": "format(${1})"
+    },
+    {
+      "label": "help",
+      "insert": "help(${1})"
+    }
+  ],
+  "snippets": {
+    "def": {
+      "prefix": "def",
+      "body": [
+        "def ${1:nome}(${2}):",
+        "\t${0:pass}"
+      ],
+      "description": "Função"
+    },
+    "class": {
+      "prefix": "class",
+      "body": [
+        "class ${1:Nome}:",
+        "\tdef __init__(self${2}):",
+        "\t\t${0:pass}"
+      ],
+      "description": "Classe"
+    },
+    "ifmain": {
+      "prefix": "ifmain",
+      "body": [
+        "if __name__ == \"__main__\":",
+        "\t${0:main()}"
+      ],
+      "description": "if __name__ == \"__main__\""
+    },
+    "for": {
+      "prefix": "for",
+      "body": [
+        "for ${1:item} in ${2:lista}:",
+        "\t${0:pass}"
+      ],
+      "description": "for ... in"
+    },
+    "forr": {
+      "prefix": "forr",
+      "body": [
+        "for ${1:i} in range(${2:n}):",
+        "\t${0:pass}"
+      ],
+      "description": "for ... in range"
+    },
+    "while": {
+      "prefix": "while",
+      "body": [
+        "while ${1:condicao}:",
+        "\t${0:pass}"
+      ],
+      "description": "while"
+    },
+    "try": {
+      "prefix": "try",
+      "body": [
+        "try:",
+        "\t${1:pass}",
+        "except ${2:Exception} as ${3:e}:",
+        "\t${0:print(e)}"
+      ],
+      "description": "try / except"
+    },
+    "with": {
+      "prefix": "with",
+      "body": [
+        "with open(\"${1:arquivo.txt}\", \"${2:r}\", encoding=\"utf-8\") as ${3:f}:",
+        "\t${0:conteudo = f.read()}"
+      ],
+      "description": "with open"
+    },
+    "lc": {
+      "prefix": "lc",
+      "body": [
+        "[${1:x} for ${1:x} in ${2:lista}${3: if ${4:condicao}}]"
+      ],
+      "description": "List comprehension"
+    },
+    "fprint": {
+      "prefix": "fprint",
+      "body": [
+        "print(f\"${1:{valor\\}}\")"
+      ],
+      "description": "print com f-string"
+    }
+  }
+}

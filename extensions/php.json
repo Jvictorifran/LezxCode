@@ -1,0 +1,206 @@
+{
+  "name": "PHP",
+  "publisher": "Lezx",
+  "version": "1.0.0",
+  "icon": {
+    "text": "php",
+    "color": "#8892bf"
+  },
+  "description": "IntelliSense completo para PHP (e Laravel) com o Intelephense, baixado via npm na instalação: erros, autocompletar, ir para definição, documentação e formatação.",
+  "languages": [
+    "php"
+  ],
+  "server": {
+    "npm": "intelephense",
+    "command": "intelephense",
+    "args": [
+      "--stdio"
+    ]
+  },
+  "keywords": [
+    "abstract",
+    "array",
+    "as",
+    "break",
+    "case",
+    "catch",
+    "class",
+    "clone",
+    "const",
+    "continue",
+    "declare",
+    "default",
+    "do",
+    "echo",
+    "else",
+    "elseif",
+    "enum",
+    "extends",
+    "final",
+    "finally",
+    "fn",
+    "for",
+    "foreach",
+    "function",
+    "global",
+    "if",
+    "implements",
+    "include",
+    "include_once",
+    "instanceof",
+    "interface",
+    "isset",
+    "match",
+    "namespace",
+    "new",
+    "null",
+    "private",
+    "protected",
+    "public",
+    "readonly",
+    "require",
+    "require_once",
+    "return",
+    "static",
+    "switch",
+    "throw",
+    "trait",
+    "try",
+    "unset",
+    "use",
+    "while",
+    "yield",
+    "true",
+    "false"
+  ],
+  "functions": [
+    {
+      "label": "var_dump",
+      "insert": "var_dump(${1});"
+    },
+    {
+      "label": "print_r",
+      "insert": "print_r(${1});"
+    },
+    {
+      "label": "echo",
+      "insert": "echo ${1};"
+    },
+    {
+      "label": "count",
+      "insert": "count(${1})"
+    },
+    {
+      "label": "strlen",
+      "insert": "strlen(${1})"
+    },
+    {
+      "label": "explode",
+      "insert": "explode('${1:,}', ${2})"
+    },
+    {
+      "label": "implode",
+      "insert": "implode('${1:, }', ${2})"
+    },
+    {
+      "label": "array_map",
+      "insert": "array_map(fn(${1:\\$x}) => ${2}, ${3})"
+    },
+    {
+      "label": "array_filter",
+      "insert": "array_filter(${1}, fn(${2:\\$x}) => ${3})"
+    },
+    {
+      "label": "in_array",
+      "insert": "in_array(${1}, ${2})"
+    },
+    {
+      "label": "json_encode",
+      "insert": "json_encode(${1})"
+    },
+    {
+      "label": "json_decode",
+      "insert": "json_decode(${1}, true)"
+    },
+    {
+      "label": "str_replace",
+      "insert": "str_replace(${1:busca}, ${2:troca}, ${3})"
+    },
+    {
+      "label": "dd",
+      "insert": "dd(${1});",
+      "detail": "dd(...)",
+      "doc": "Laravel: dump and die"
+    }
+  ],
+  "snippets": {
+    "php": {
+      "prefix": "php",
+      "body": [
+        "<?php",
+        "",
+        "$0"
+      ],
+      "description": "Abertura <?php"
+    },
+    "class": {
+      "prefix": "class",
+      "body": [
+        "class ${1:Nome}",
+        "{",
+        "\tpublic function __construct(${2})",
+        "\t{",
+        "\t\t$0",
+        "\t}",
+        "}"
+      ],
+      "description": "Classe"
+    },
+    "fun": {
+      "prefix": "fun",
+      "body": [
+        "public function ${1:nome}(${2}): ${3:void}",
+        "{",
+        "\t$0",
+        "}"
+      ],
+      "description": "Método público"
+    },
+    "foreach": {
+      "prefix": "foreach",
+      "body": [
+        "foreach (\\$${1:itens} as \\$${2:item}) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "foreach"
+    },
+    "if": {
+      "prefix": "if",
+      "body": [
+        "if (${1:condicao}) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "if"
+    },
+    "try": {
+      "prefix": "try",
+      "body": [
+        "try {",
+        "\t$1",
+        "} catch (${2:\\\\Exception} \\$e) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "try / catch"
+    },
+    "route": {
+      "prefix": "route",
+      "body": [
+        "Route::${1|get,post,put,delete|}('${2:/}', [${3:Controller}::class, '${4:index}']);"
+      ],
+      "description": "Laravel: rota"
+    }
+  }
+}

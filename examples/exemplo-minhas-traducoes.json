@@ -1,0 +1,13 @@
+// Suas próprias traduções de mensagens de erro (têm prioridade sobre as embutidas).
+// "match": expressão regular que precisa casar com a mensagem INTEIRA (em inglês).
+//          Use (.+?) para capturar partes e $1, $2... para reaproveitá-las no "replace".
+// "lang" (opcional): limita a uma linguagem — c (vale para C++), python, php, javascript (vale para TS)...
+// Dica: passe o mouse sobre o erro para ver a mensagem original em inglês e copie daqui.
+// Tire as // das regras abaixo, salve (⌘S) e a tradução é aplicada na hora.
+{
+  "name": "Minhas traduções",
+  "rules": [
+    // { "match": "Expected ';' after expression", "replace": "Esqueceu o ponto e vírgula!", "lang": "c" },
+    // { "match": "Unused variable '(.+?)'", "replace": "Você criou '$1' e não usou" }
+  ]
+}

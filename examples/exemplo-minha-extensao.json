@@ -1,0 +1,42 @@
+{
+  "name": "Minha Linguagem (exemplo)",
+  "publisher": "Eu",
+  "version": "1.0.0",
+  "icon": {
+    "text": "✱",
+    "color": "#cba6f7"
+  },
+  "description": "Exemplo de extensão feita por você. Mude \"languages\" para a linguagem que quiser (ex.: [\"css\"], [\"html\"], [\"sql\"]) e salve.",
+  "languages": [
+    "markdown"
+  ],
+  "keywords": [
+    "TODO",
+    "FIXME"
+  ],
+  "functions": [
+    {
+      "label": "data",
+      "insert": "**Data:** ${CURRENT_DATE}/${CURRENT_MONTH}/${CURRENT_YEAR}",
+      "detail": "Insere a data de hoje"
+    }
+  ],
+  "snippets": {
+    "tarefa": {
+      "prefix": "tarefa",
+      "body": [
+        "- [ ] ${1:tarefa}"
+      ],
+      "description": "Item de checklist"
+    },
+    "code": {
+      "prefix": "code",
+      "body": [
+        "```${1:js}",
+        "$0",
+        "```"
+      ],
+      "description": "Bloco de código"
+    }
+  }
+}

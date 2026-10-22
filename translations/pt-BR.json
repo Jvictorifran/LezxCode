@@ -1,0 +1,699 @@
+{
+  "name": "Português (Brasil)",
+  "description": "Tradução das mensagens de erro mais comuns de C/C++, Python, PHP e JavaScript/TypeScript.",
+  "rules": [
+    {
+      "match": "Expected '(.+?)' after expression",
+      "replace": "Faltou '$1' depois da expressão",
+      "lang": "c"
+    },
+    {
+      "match": "Expected ';' at end of declaration(?: list)?",
+      "replace": "Faltou ';' no fim da declaração",
+      "lang": "c"
+    },
+    {
+      "match": "Expected ';' after (.+)",
+      "replace": "Faltou ';' depois de $1",
+      "lang": "c"
+    },
+    {
+      "match": "Expected '(.+?)' after '(.+?)'",
+      "replace": "Faltou '$1' depois de '$2'",
+      "lang": "c"
+    },
+    {
+      "match": "Expected expression",
+      "replace": "Esperava uma expressão (valor, variável ou chamada)"
+    },
+    {
+      "match": "Expected identifier(?: or '\\(')?",
+      "replace": "Esperava um nome (identificador)"
+    },
+    {
+      "match": "Expected '(.+?)'",
+      "replace": "Esperava '$1'"
+    },
+    {
+      "match": "Extraneous closing brace \\('\\}'\\)",
+      "replace": "Chave '}' sobrando",
+      "lang": "c"
+    },
+    {
+      "match": "Use of undeclared identifier '(.+?)'; did you mean '(.+?)'\\?",
+      "replace": "'$1' não foi declarado; você quis dizer '$2'?",
+      "lang": "c"
+    },
+    {
+      "match": "Use of undeclared identifier '(.+?)'",
+      "replace": "'$1' não foi declarado (faltou declarar a variável ou o #include?)",
+      "lang": "c"
+    },
+    {
+      "match": "Call to undeclared library function '(.+?)' with type '(.+?)'.*",
+      "replace": "Função da biblioteca '$1' usada sem o #include correspondente",
+      "lang": "c"
+    },
+    {
+      "match": "Call to undeclared function '(.+?)'.*",
+      "replace": "Função '$1' não foi declarada (falta o protótipo ou o #include?)",
+      "lang": "c"
+    },
+    {
+      "match": "Implicitly declaring library function '(.+?)' with type '(.+?)'",
+      "replace": "Função '$1' usada sem o #include correspondente",
+      "lang": "c"
+    },
+    {
+      "match": "Incompatible pointer to integer conversion (?:initializing|assigning to|passing) '(.+?)' (?:with an expression of type|from|to parameter of type) '(.+?)'.*",
+      "replace": "Tipos incompatíveis: '$2' (ponteiro/texto) em uma variável '$1'",
+      "lang": "c"
+    },
+    {
+      "match": "Incompatible integer to pointer conversion (?:initializing|assigning to|passing) '(.+?)' (?:with an expression of type|from|to parameter of type) '(.+?)'.*",
+      "replace": "Tipos incompatíveis: número '$2' onde se esperava o ponteiro '$1'",
+      "lang": "c"
+    },
+    {
+      "match": "Incompatible pointer types (?:initializing|assigning to|passing) '(.+?)' (?:with an expression of type|from|to parameter of type) '(.+?)'.*",
+      "replace": "Tipos de ponteiro incompatíveis: '$2' em '$1'",
+      "lang": "c"
+    },
+    {
+      "match": "Assigning to '(.+?)' from incompatible type '(.+?)'",
+      "replace": "Não dá para atribuir '$2' a '$1' (tipos incompatíveis)",
+      "lang": "c"
+    },
+    {
+      "match": "Initializing '(.+?)' with an expression of incompatible type '(.+?)'",
+      "replace": "Não dá para iniciar '$1' com um valor do tipo '$2'",
+      "lang": "c"
+    },
+    {
+      "match": "Unused variable '(.+?)'",
+      "replace": "Variável '$1' declarada, mas não usada",
+      "lang": "c"
+    },
+    {
+      "match": "Unused parameter '(.+?)'",
+      "replace": "Parâmetro '$1' não é usado",
+      "lang": "c"
+    },
+    {
+      "match": "Unused function '(.+?)'",
+      "replace": "Função '$1' nunca é usada",
+      "lang": "c"
+    },
+    {
+      "match": "Variable '(.+?)' is uninitialized when used here",
+      "replace": "A variável '$1' está sendo usada sem valor inicial",
+      "lang": "c"
+    },
+    {
+      "match": "Variable '(.+?)' is used uninitialized whenever (.+)",
+      "replace": "A variável '$1' pode ser usada sem valor inicial",
+      "lang": "c"
+    },
+    {
+      "match": "Format specifies type '(.+?)' but the argument has type '(.+?)'",
+      "replace": "O formato espera '$1', mas o argumento é do tipo '$2' (confira o %d, %s, %f…)",
+      "lang": "c"
+    },
+    {
+      "match": "More '%' conversions than data arguments",
+      "replace": "Há mais '%' no texto do que valores passados",
+      "lang": "c"
+    },
+    {
+      "match": "Data argument not used by format string",
+      "replace": "Valor sobrando: não há um '%' correspondente no texto",
+      "lang": "c"
+    },
+    {
+      "match": "Invalid conversion specifier '(.+?)'",
+      "replace": "Especificador '%$1' inválido",
+      "lang": "c"
+    },
+    {
+      "match": "Non-void function does not return a value(?: in all control paths)?",
+      "replace": "A função deveria retornar um valor (falta o return)",
+      "lang": "c"
+    },
+    {
+      "match": "Non-void function '(.+?)' should return a value",
+      "replace": "A função '$1' deveria retornar um valor",
+      "lang": "c"
+    },
+    {
+      "match": "Void function '(.+?)' should not return a value",
+      "replace": "A função void '$1' não deve retornar valor",
+      "lang": "c"
+    },
+    {
+      "match": "Too few arguments to function call, expected (?:at least )?(\\d+), have (\\d+)",
+      "replace": "Poucos argumentos: esperava $1, recebeu $2",
+      "lang": "c"
+    },
+    {
+      "match": "Too many arguments to function call, expected (?:at most )?(\\d+), have (\\d+)",
+      "replace": "Argumentos demais: esperava $1, recebeu $2",
+      "lang": "c"
+    },
+    {
+      "match": "No member named '(.+?)' in '(.+?)'",
+      "replace": "'$2' não tem o campo '$1'",
+      "lang": "c"
+    },
+    {
+      "match": "Member reference type '(.+?)' is a pointer; (?:did you mean|maybe you meant) to use '->'\\?",
+      "replace": "'$1' é um ponteiro: use '->' em vez de '.'",
+      "lang": "c"
+    },
+    {
+      "match": "Member reference type '(.+?)' is not a pointer; (?:did you mean|maybe you meant) to use '\\.'\\?",
+      "replace": "'$1' não é um ponteiro: use '.' em vez de '->'",
+      "lang": "c"
+    },
+    {
+      "match": "Redefinition of '(.+?)'(?: with a different type.*)?",
+      "replace": "'$1' foi definido mais de uma vez",
+      "lang": "c"
+    },
+    {
+      "match": "Conflicting types for '(.+?)'",
+      "replace": "Tipos diferentes para '$1' (o protótipo não bate com a definição)",
+      "lang": "c"
+    },
+    {
+      "match": "'(.+?)' file not found",
+      "replace": "Arquivo '$1' não encontrado",
+      "lang": "c"
+    },
+    {
+      "match": "Unknown type name '(.+?)'",
+      "replace": "Tipo desconhecido: '$1' (faltou o #include ou o typedef?)",
+      "lang": "c"
+    },
+    {
+      "match": "Using the result of an assignment as a condition without parentheses",
+      "replace": "Atribuição (=) usada como condição; você quis dizer '=='?",
+      "lang": "c"
+    },
+    {
+      "match": "Array index (-?\\d+) is past the end of the array.*",
+      "replace": "O índice $1 está além do fim do vetor",
+      "lang": "c"
+    },
+    {
+      "match": "Array index (-?\\d+) is before the beginning of the array",
+      "replace": "O índice $1 está antes do começo do vetor",
+      "lang": "c"
+    },
+    {
+      "match": "Indirection requires pointer operand \\('(.+?)' invalid\\)",
+      "replace": "Só dá para usar '*' em ponteiros ('$1' não é ponteiro)",
+      "lang": "c"
+    },
+    {
+      "match": "Called object type '(.+?)' is not a function or function pointer",
+      "replace": "'$1' não é uma função",
+      "lang": "c"
+    },
+    {
+      "match": "Division by zero is undefined",
+      "replace": "Divisão por zero",
+      "lang": "c"
+    },
+    {
+      "match": "Remainder by zero is undefined",
+      "replace": "Resto de divisão por zero",
+      "lang": "c"
+    },
+    {
+      "match": "Code will never be executed",
+      "replace": "Este código nunca será executado"
+    },
+    {
+      "match": "Included header (.+?) is not used directly.*",
+      "replace": "O #include $1 não é usado neste arquivo",
+      "lang": "c"
+    },
+    {
+      "match": "Comparison of integers of different signs: '(.+?)' and '(.+?)'",
+      "replace": "Comparação entre inteiros com e sem sinal: '$1' e '$2'",
+      "lang": "c"
+    },
+    {
+      "match": "Missing terminating '(.)' character",
+      "replace": "Faltou fechar com $1",
+      "lang": "c"
+    },
+    {
+      "match": "Address of stack memory associated with local variable '(.+?)' returned",
+      "replace": "Retornando o endereço da variável local '$1' (ela deixa de existir quando a função termina)",
+      "lang": "c"
+    },
+    {
+      "match": "Expression is not assignable",
+      "replace": "Essa expressão não pode receber valor (não dá para usar '=' aqui)",
+      "lang": "c"
+    },
+    {
+      "match": "Array type '(.+?)' is not assignable",
+      "replace": "Vetores não podem ser atribuídos com '=' (use strcpy ou um laço)",
+      "lang": "c"
+    },
+    {
+      "match": "Declaration of '(.+?)' must be imported from module '(.+?)' before it is required",
+      "replace": "'$1' precisa do #include de $2",
+      "lang": "c"
+    },
+    {
+      "match": "Statement requires expression of (.+?) type \\('(.+?)' invalid\\)",
+      "replace": "O comando precisa de um valor do tipo $1 ('$2' não serve)",
+      "lang": "c"
+    },
+    {
+      "match": "Switch case is in protected scope",
+      "replace": "Declaração de variável dentro de um 'case' sem chaves { }",
+      "lang": "c"
+    },
+    {
+      "match": "Label at end of compound statement.*",
+      "replace": "Falta um comando depois do rótulo (ex.: break; no último case)",
+      "lang": "c"
+    },
+    {
+      "match": "'(.)' was never closed",
+      "replace": "'$1' foi aberto e nunca fechado",
+      "lang": "python"
+    },
+    {
+      "match": "unmatched '(.)'",
+      "replace": "'$1' fechado sem ter sido aberto",
+      "lang": "python"
+    },
+    {
+      "match": "closing parenthesis '(.)' does not match opening parenthesis '(.)'(?: on line (\\d+))?",
+      "replace": "'$1' não combina com o '$2' aberto",
+      "lang": "python"
+    },
+    {
+      "match": "invalid syntax\\. Perhaps you forgot a comma\\?",
+      "replace": "Sintaxe inválida. Faltou uma vírgula?",
+      "lang": "python"
+    },
+    {
+      "match": "invalid syntax\\. Maybe you meant '==' or ':=' instead of '='\\?",
+      "replace": "Sintaxe inválida. Você quis dizer '==' em vez de '='?",
+      "lang": "python"
+    },
+    {
+      "match": "invalid syntax",
+      "replace": "Sintaxe inválida",
+      "lang": "python"
+    },
+    {
+      "match": "expected ':'",
+      "replace": "Faltou ':' no fim da linha",
+      "lang": "python"
+    },
+    {
+      "match": "expected '(.+?)'",
+      "replace": "Esperava '$1'",
+      "lang": "python"
+    },
+    {
+      "match": "unexpected indent",
+      "replace": "Indentação inesperada (espaços a mais no começo da linha)",
+      "lang": "python"
+    },
+    {
+      "match": "expected an indented block after '(.+?)' statement on line (\\d+)",
+      "replace": "Esperava um bloco indentado depois do '$1' da linha $2",
+      "lang": "python"
+    },
+    {
+      "match": "expected an indented block after function definition on line (\\d+)",
+      "replace": "Esperava o corpo da função (indentado) depois da linha $1",
+      "lang": "python"
+    },
+    {
+      "match": "expected an indented block after class definition on line (\\d+)",
+      "replace": "Esperava o corpo da classe (indentado) depois da linha $1",
+      "lang": "python"
+    },
+    {
+      "match": "expected an indented block.*",
+      "replace": "Esperava um bloco indentado",
+      "lang": "python"
+    },
+    {
+      "match": "unindent does not match any outer indentation level",
+      "replace": "A indentação não bate com nenhum nível anterior (misturou espaços?)",
+      "lang": "python"
+    },
+    {
+      "match": "unterminated string literal \\(detected at line (\\d+)\\)",
+      "replace": "Texto (string) sem as aspas de fechamento (linha $1)",
+      "lang": "python"
+    },
+    {
+      "match": "unterminated triple-quoted string literal.*",
+      "replace": "Texto com aspas triplas que nunca foi fechado",
+      "lang": "python"
+    },
+    {
+      "match": "invalid character '(.+?)' \\((U\\+\\w+)\\)",
+      "replace": "Caractere inválido '$1' ($2)",
+      "lang": "python"
+    },
+    {
+      "match": "invalid decimal literal",
+      "replace": "Número inválido (nome de variável começando com número?)",
+      "lang": "python"
+    },
+    {
+      "match": "Missing parentheses in call to '(.+?)'\\. Did you mean (.+)\\?",
+      "replace": "Faltam os parênteses: use $2",
+      "lang": "python"
+    },
+    {
+      "match": "cannot assign to (.+?) here\\. Maybe you meant '==' instead of '='\\?",
+      "replace": "Não dá para atribuir a $1 aqui. Você quis dizer '=='?",
+      "lang": "python"
+    },
+    {
+      "match": "cannot assign to (.+)",
+      "replace": "Não dá para atribuir a $1",
+      "lang": "python"
+    },
+    {
+      "match": "'return' outside function",
+      "replace": "'return' fora de uma função",
+      "lang": "python"
+    },
+    {
+      "match": "'(break|continue)' (?:outside loop|not properly in loop)",
+      "replace": "'$1' fora de um laço",
+      "lang": "python"
+    },
+    {
+      "match": "inconsistent use of tabs and spaces in indentation",
+      "replace": "Mistura de tabs e espaços na indentação",
+      "lang": "python"
+    },
+    {
+      "match": "\\\"(.+?)\\\" is not defined",
+      "replace": "\"$1\" não está definido",
+      "lang": "python"
+    },
+    {
+      "match": "Import \\\"(.+?)\\\" could not be resolved(?: from source)?",
+      "replace": "Não foi possível encontrar o módulo \"$1\" (está instalado?)",
+      "lang": "python"
+    },
+    {
+      "match": "\\\"(.+?)\\\" is not accessed",
+      "replace": "\"$1\" não é usado",
+      "lang": "python"
+    },
+    {
+      "match": "\\\"(.+?)\\\" is possibly unbound",
+      "replace": "\"$1\" pode não ter sido definido neste ponto",
+      "lang": "python"
+    },
+    {
+      "match": "\\\"(.+?)\\\" is unbound",
+      "replace": "\"$1\" é usado antes de ser definido",
+      "lang": "python"
+    },
+    {
+      "match": "Cannot access attribute \\\"(.+?)\\\" for class \\\"(.+?)\\\".*",
+      "replace": "\"$2\" não tem o atributo \"$1\"",
+      "lang": "python"
+    },
+    {
+      "match": "Argument missing for parameter \\\"(.+?)\\\"",
+      "replace": "Faltou o argumento \"$1\"",
+      "lang": "python"
+    },
+    {
+      "match": "Arguments missing for parameters (.+)",
+      "replace": "Faltaram os argumentos $1",
+      "lang": "python"
+    },
+    {
+      "match": "Expected (\\d+) positional arguments?",
+      "replace": "Esperava $1 argumento(s)",
+      "lang": "python"
+    },
+    {
+      "match": "No parameter named \\\"(.+?)\\\"",
+      "replace": "Não existe parâmetro chamado \"$1\"",
+      "lang": "python"
+    },
+    {
+      "match": "Operator \\\"(.+?)\\\" not supported for types \\\"(.+?)\\\" and \\\"(.+?)\\\".*",
+      "replace": "O operador \"$1\" não funciona entre \"$2\" e \"$3\"",
+      "lang": "python"
+    },
+    {
+      "match": "\\\"(.)\\\" was not closed",
+      "replace": "\"$1\" não foi fechado",
+      "lang": "python"
+    },
+    {
+      "match": "Expected indented block",
+      "replace": "Esperava um bloco indentado",
+      "lang": "python"
+    },
+    {
+      "match": "Unindent not expected",
+      "replace": "Recuo de indentação inesperado",
+      "lang": "python"
+    },
+    {
+      "match": "Unexpected indentation",
+      "replace": "Indentação inesperada",
+      "lang": "python"
+    },
+    {
+      "match": "Statements must be separated by newlines or semicolons",
+      "replace": "Comandos devem ficar em linhas separadas (ou separados por ';')",
+      "lang": "python"
+    },
+    {
+      "match": "Expected \\\":\\\"",
+      "replace": "Faltou ':'",
+      "lang": "python"
+    },
+    {
+      "match": "String literal is unterminated",
+      "replace": "Texto (string) sem as aspas de fechamento",
+      "lang": "python"
+    },
+    {
+      "match": "Object of type \\\"(.+?)\\\" is not callable.*",
+      "replace": "Um valor do tipo \"$1\" não pode ser chamado como função",
+      "lang": "python"
+    },
+    {
+      "match": "\\\"(.+?)\\\" is not a known attribute of module \\\"(.+?)\\\"",
+      "replace": "O módulo \"$2\" não tem \"$1\"",
+      "lang": "python"
+    },
+    {
+      "match": "Type \\\"(.+?)\\\" is not assignable to declared type \\\"(.+?)\\\".*",
+      "replace": "O tipo \"$1\" não combina com o tipo declarado \"$2\"",
+      "lang": "python"
+    },
+    {
+      "match": "Code is unreachable",
+      "replace": "Código inalcançável"
+    },
+    {
+      "match": "Syntax error: unexpected token '(.+?)', expected '(.+?)'\\.?",
+      "replace": "Erro de sintaxe: '$1' inesperado, esperava '$2'",
+      "lang": "php"
+    },
+    {
+      "match": "Syntax error: unexpected token '(.+?)'\\.?",
+      "replace": "Erro de sintaxe: '$1' inesperado",
+      "lang": "php"
+    },
+    {
+      "match": "Syntax error: unexpected end of file\\.?",
+      "replace": "Erro de sintaxe: o arquivo acabou antes do esperado (faltou fechar algo?)",
+      "lang": "php"
+    },
+    {
+      "match": "Syntax error: expected '(.+?)'\\.?",
+      "replace": "Erro de sintaxe: esperava '$1'",
+      "lang": "php"
+    },
+    {
+      "match": "Undefined variable '\\$(.+?)'\\.?",
+      "replace": "Variável '$$$1' não definida",
+      "lang": "php"
+    },
+    {
+      "match": "Undefined function '(.+?)'\\.?",
+      "replace": "Função '$1' não definida",
+      "lang": "php"
+    },
+    {
+      "match": "Undefined type '(.+?)'\\.?",
+      "replace": "Classe/tipo '$1' não encontrado (faltou o use?)",
+      "lang": "php"
+    },
+    {
+      "match": "Undefined method '(.+?)'\\.?",
+      "replace": "Método '$1' não definido",
+      "lang": "php"
+    },
+    {
+      "match": "Undefined property '(.+?)'\\.?",
+      "replace": "Propriedade '$1' não definida",
+      "lang": "php"
+    },
+    {
+      "match": "Undefined constant '(.+?)'\\.?",
+      "replace": "Constante '$1' não definida",
+      "lang": "php"
+    },
+    {
+      "match": "Expected (\\d+) arguments?\\. Found (\\d+)\\.?",
+      "replace": "Esperava $1 argumento(s), recebeu $2",
+      "lang": "php"
+    },
+    {
+      "match": "Expected type '(.+?)'\\. Found '(.+?)'\\.?",
+      "replace": "Esperava o tipo '$1', recebeu '$2'",
+      "lang": "php"
+    },
+    {
+      "match": "Symbol '(.+?)' is declared but not used\\.?",
+      "replace": "'$1' foi declarado, mas não é usado",
+      "lang": "php"
+    },
+    {
+      "match": "'(.+?)' expected\\.",
+      "replace": "Esperava '$1'",
+      "lang": "javascript"
+    },
+    {
+      "match": "Cannot find name '(.+?)'\\. Did you mean '(.+?)'\\?",
+      "replace": "'$1' não existe. Você quis dizer '$2'?",
+      "lang": "javascript"
+    },
+    {
+      "match": "Cannot find name '(.+?)'\\..*",
+      "replace": "'$1' não existe (não foi declarado)",
+      "lang": "javascript"
+    },
+    {
+      "match": "Unterminated string literal\\.",
+      "replace": "Texto (string) sem as aspas de fechamento",
+      "lang": "javascript"
+    },
+    {
+      "match": "Unterminated template literal\\.",
+      "replace": "Template string (`) sem a crase de fechamento",
+      "lang": "javascript"
+    },
+    {
+      "match": "Declaration or statement expected\\.",
+      "replace": "Esperava uma declaração ou comando",
+      "lang": "javascript"
+    },
+    {
+      "match": "Expression expected\\.",
+      "replace": "Esperava uma expressão",
+      "lang": "javascript"
+    },
+    {
+      "match": "Identifier expected\\..*",
+      "replace": "Esperava um nome (identificador)",
+      "lang": "javascript"
+    },
+    {
+      "match": "Unexpected keyword or identifier\\.",
+      "replace": "Palavra-chave ou nome inesperado",
+      "lang": "javascript"
+    },
+    {
+      "match": "Unexpected token\\..*",
+      "replace": "Símbolo inesperado",
+      "lang": "javascript"
+    },
+    {
+      "match": "Invalid character\\.",
+      "replace": "Caractere inválido",
+      "lang": "javascript"
+    },
+    {
+      "match": "Cannot redeclare block-scoped variable '(.+?)'\\.",
+      "replace": "A variável '$1' já foi declarada",
+      "lang": "javascript"
+    },
+    {
+      "match": "Property '(.+?)' does not exist on type '(.+?)'\\..*",
+      "replace": "A propriedade '$1' não existe em '$2'",
+      "lang": "javascript"
+    },
+    {
+      "match": "Type '(.+?)' is not assignable to type '(.+?)'\\..*",
+      "replace": "O tipo '$1' não pode ser atribuído a '$2'",
+      "lang": "javascript"
+    },
+    {
+      "match": "Argument of type '(.+?)' is not assignable to parameter of type '(.+?)'\\..*",
+      "replace": "Argumento do tipo '$1' não serve para o parâmetro do tipo '$2'",
+      "lang": "javascript"
+    },
+    {
+      "match": "Expected (\\d+) arguments?, but got (\\d+)\\.",
+      "replace": "Esperava $1 argumento(s), recebeu $2",
+      "lang": "javascript"
+    },
+    {
+      "match": "'(.+?)' is declared but its value is never read\\.",
+      "replace": "'$1' foi declarado, mas nunca é usado",
+      "lang": "javascript"
+    },
+    {
+      "match": "Unreachable code detected\\.",
+      "replace": "Código inalcançável",
+      "lang": "javascript"
+    },
+    {
+      "match": "Cannot assign to '(.+?)' because it is a constant\\.",
+      "replace": "Não dá para mudar '$1': é uma constante (const)",
+      "lang": "javascript"
+    },
+    {
+      "match": "'(.+?)' is possibly 'null'\\.",
+      "replace": "'$1' pode ser null",
+      "lang": "javascript"
+    },
+    {
+      "match": "'(.+?)' is possibly 'undefined'\\.",
+      "replace": "'$1' pode ser undefined",
+      "lang": "javascript"
+    },
+    {
+      "match": "Unexpected end of text\\.|'\\}' expected\\.",
+      "replace": "Faltou fechar com '}'",
+      "lang": "javascript"
+    },
+    {
+      "match": "Missing semicolon\\.?",
+      "replace": "Faltou ';'"
+    },
+    {
+      "match": "Unexpected end of file\\.?",
+      "replace": "O arquivo acabou antes do esperado (faltou fechar algo?)"
+    }
+  ]
+}

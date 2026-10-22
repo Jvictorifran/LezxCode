@@ -1,0 +1,5 @@
+node_modules/
+dist/
+release/
+src/gen/
+.DS_Store

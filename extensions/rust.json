@@ -1,0 +1,90 @@
+{
+  "name": "Rust",
+  "publisher": "Lezx",
+  "version": "1.0.0",
+  "icon": {
+    "text": "rs",
+    "color": "#dea584"
+  },
+  "description": "IntelliSense e erros com o rust-analyzer. Para instalar: rustup component add rust-analyzer",
+  "languages": [
+    "rust"
+  ],
+  "server": {
+    "command": "rust-analyzer",
+    "installHint": "rustup component add rust-analyzer"
+  },
+  "keywords": [
+    "as",
+    "async",
+    "await",
+    "break",
+    "const",
+    "continue",
+    "crate",
+    "else",
+    "enum",
+    "extern",
+    "false",
+    "fn",
+    "for",
+    "if",
+    "impl",
+    "in",
+    "let",
+    "loop",
+    "match",
+    "mod",
+    "move",
+    "mut",
+    "pub",
+    "ref",
+    "return",
+    "self",
+    "Self",
+    "static",
+    "struct",
+    "super",
+    "trait",
+    "true",
+    "type",
+    "unsafe",
+    "use",
+    "where",
+    "while"
+  ],
+  "functions": [
+    {
+      "label": "println",
+      "insert": "println!(\"${1:{\\}}\", ${2});"
+    },
+    {
+      "label": "vec",
+      "insert": "vec![${1}]"
+    },
+    {
+      "label": "format",
+      "insert": "format!(\"${1}\")"
+    }
+  ],
+  "snippets": {
+    "main": {
+      "prefix": "main",
+      "body": [
+        "fn main() {",
+        "\t$0",
+        "}"
+      ],
+      "description": "fn main"
+    },
+    "fn": {
+      "prefix": "fn",
+      "body": [
+        "fn ${1:nome}(${2}) -> ${3:()} {",
+        "\t$0",
+        "}"
+      ],
+      "description": "Função"
+    }
+  }
+}

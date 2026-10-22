@@ -1,0 +1,162 @@
+{
+  "name": "JavaScript / TypeScript",
+  "publisher": "Lezx",
+  "version": "1.0.0",
+  "icon": {
+    "text": "JS",
+    "color": "#f0d43a"
+  },
+  "description": "Snippets para JavaScript, TypeScript, React e Node. O IntelliSense de JS/TS (erros, autocompletar, ir para definição) já vem embutido no editor.",
+  "languages": [
+    "javascript",
+    "typescript"
+  ],
+  "functions": [
+    {
+      "label": "log",
+      "insert": "console.log(${1});",
+      "detail": "console.log()",
+      "doc": "Mostra no console."
+    },
+    {
+      "label": "clog",
+      "insert": "console.log('${1:valor}:', ${1:valor});",
+      "detail": "console.log com rótulo"
+    },
+    {
+      "label": "querySelector",
+      "insert": "document.querySelector('${1:seletor}')"
+    },
+    {
+      "label": "addEventListener",
+      "insert": "addEventListener('${1:click}', (${2:e}) => {\n\t$0\n});"
+    },
+    {
+      "label": "fetch",
+      "insert": "fetch('${1:url}')"
+    }
+  ],
+  "snippets": {
+    "fn": {
+      "prefix": "fn",
+      "body": [
+        "function ${1:nome}(${2}) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "Função"
+    },
+    "af": {
+      "prefix": "af",
+      "body": [
+        "const ${1:nome} = (${2}) => {",
+        "\t$0",
+        "};"
+      ],
+      "description": "Arrow function"
+    },
+    "afn": {
+      "prefix": "afn",
+      "body": [
+        "async function ${1:nome}(${2}) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "Função async"
+    },
+    "imp": {
+      "prefix": "imp",
+      "body": [
+        "import ${2:modulo} from '${1:pacote}';"
+      ],
+      "description": "import ... from"
+    },
+    "impd": {
+      "prefix": "impd",
+      "body": [
+        "import { ${2} } from '${1:pacote}';"
+      ],
+      "description": "import { } from"
+    },
+    "exp": {
+      "prefix": "exp",
+      "body": [
+        "export default ${1:nome};"
+      ],
+      "description": "export default"
+    },
+    "fetchj": {
+      "prefix": "fetchj",
+      "body": [
+        "const ${1:res} = await fetch('${2:url}');",
+        "const ${3:dados} = await ${1:res}.json();"
+      ],
+      "description": "fetch + json"
+    },
+    "forof": {
+      "prefix": "forof",
+      "body": [
+        "for (const ${1:item} of ${2:lista}) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "for...of"
+    },
+    "fori": {
+      "prefix": "fori",
+      "body": [
+        "for (let ${1:i} = 0; ${1:i} < ${2:lista}.length; ${1:i}++) {",
+        "\t$0",
+        "}"
+      ],
+      "description": "for com índice"
+    },
+    "try": {
+      "prefix": "try",
+      "body": [
+        "try {",
+        "\t$1",
+        "} catch (${2:erro}) {",
+        "\tconsole.error(${2:erro});",
+        "}"
+      ],
+      "description": "try / catch"
+    },
+    "rfc": {
+      "prefix": "rfc",
+      "body": [
+        "export default function ${1:Componente}() {",
+        "\treturn (",
+        "\t\t<div>$0</div>",
+        "\t);",
+        "}"
+      ],
+      "description": "React: componente"
+    },
+    "us": {
+      "prefix": "us",
+      "body": [
+        "const [${1:valor}, set${1/(.*)/${1:/capitalize}/}] = useState(${2});"
+      ],
+      "description": "React: useState"
+    },
+    "ue": {
+      "prefix": "ue",
+      "body": [
+        "useEffect(() => {",
+        "\t$0",
+        "}, [${1}]);"
+      ],
+      "description": "React: useEffect"
+    },
+    "dom": {
+      "prefix": "dom",
+      "body": [
+        "document.addEventListener('DOMContentLoaded', () => {",
+        "\t$0",
+        "});"
+      ],
+      "description": "DOMContentLoaded"
+    }
+  }
+}
