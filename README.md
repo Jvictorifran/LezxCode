@@ -1,18 +1,30 @@
 # Lezx Code
 
-IDE leve para desenvolvimento web no macOS. Construída com as mesmas peças centrais do VS Code: **Monaco** (o editor) e **xterm.js** (o terminal), rodando sobre o Electron. O sistema de extensões ficou de fora, e o que importa para web já vem embutido.
+[![npm](https://img.shields.io/npm/v/lezx-code?color=6a4cf0&label=npm)](https://www.npmjs.com/package/lezx-code)
+[![release](https://img.shields.io/github/v/release/Jvictorifran/LezxCode?color=6a4cf0)](https://github.com/Jvictorifran/LezxCode/releases/latest)
+
+IDE leve para desenvolvimento web no macOS e no Windows. Construída com as mesmas peças centrais do VS Code: **Monaco** (o editor) e **xterm.js** (o terminal), rodando sobre o Electron. O sistema de extensões ficou de fora, e o que importa para web já vem embutido.
 
 ## Instalação
 
-**macOS — Homebrew**
-```bash
-brew install --cask jvictorifran/tap/lezx-code
-```
-
-**macOS e Windows — npm** (instala o app e o comando `lezx`)
+**macOS e Windows — npm** (recomendado)
 ```bash
 npm install -g lezx-code
 lezx .
+```
+
+Precisa do Node.js 18 ou mais novo. Na primeira vez, o `lezx` baixa o app certo para o seu sistema (Apple Silicon, Intel ou Windows 64 bits), instala e abre a pasta atual. Não há nada para configurar. Depois disso:
+
+```bash
+lezx               # abre o Lezx Code
+lezx index.html    # abre um arquivo
+lezx --update      # reinstala o app na versão do pacote
+lezx --help
+```
+
+**macOS — Homebrew** *(em breve)*
+```bash
+brew install --cask jvictorifran/tap/lezx-code
 ```
 
 **Windows — winget** *(aguardando aprovação no repositório da Microsoft)*
