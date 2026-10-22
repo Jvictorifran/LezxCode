@@ -123,7 +123,9 @@ function createFontStore(dir) {
 let systemCache = null;
 async function systemFonts() {
   if (systemCache) return systemCache;
-  const dirs = ['/System/Library/Fonts', '/System/Library/Fonts/Supplemental', '/Library/Fonts', path.join(os.homedir(), 'Library/Fonts')];
+  const dirs = process.platform === 'win32'
+    ? [path.join(process.env.WINDIR || 'C:\\Windows', 'Fonts'), path.join(process.env.LOCALAPPDATA || '', 'Microsoft', 'Windows', 'Fonts')]
+    : ['/System/Library/Fonts', '/System/Library/Fonts/Supplemental', '/Library/Fonts', path.join(os.homedir(), 'Library/Fonts')];
   const families = new Map();
   for (const d of dirs) {
     let files = [];

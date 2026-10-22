@@ -1,7 +1,7 @@
 // Lezx Code — ponto de entrada do renderer
 import '@xterm/xterm/css/xterm.css';
 import './styles.css';
-import { api, $, $$, h, basename, dirname, relative, toast, errorToast, makeSash, store } from './ui.js';
+import { api, $, $$, h, IS_MAC, localizeKeys, basename, dirname, relative, toast, errorToast, makeSash, store } from './ui.js';
 import { state, on, emit } from './state.js';
 import { applyTheme } from './themes.js';
 import { applyIconTheme, fileIcon } from './icons.js';
@@ -456,6 +456,7 @@ function initLayout() {
     if (id) runCommand(id);
   });
   document.addEventListener('click', e => { const c = e.target.closest('[data-cmd]'); if (c) runCommand(c.dataset.cmd); });
+  $('#app-menu').addEventListener('click', e => { const r = e.currentTarget.getBoundingClientRect(); api.send('menu:app', Math.round(r.left), Math.round(r.bottom)); });
   $('#sb-live').addEventListener('click', () => runCommand(state.live.running ? 'live.stop' : 'live.start'));
   $('#sb-lang').addEventListener('click', pickLanguage);
   $('#sb-indent').addEventListener('click', pickIndent);
@@ -507,6 +508,8 @@ async function applySettings(s, first = false) {
 async function boot() {
   state.info = await api.invoke('app:info');
   const settings = await api.invoke('settings:get');
+  document.body.classList.add(IS_MAC ? 'platform-mac' : 'platform-win');
+  localizeKeys();
   await loadUserFonts();
   initTranslations();
   await applySettings(settings, true);

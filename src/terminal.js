@@ -2,7 +2,7 @@
 import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebLinksAddon } from '@xterm/addon-web-links';
-import { api, $, h, errorToast, makeSash, store } from './ui.js';
+import { api, $, h, errorToast, makeSash, store, IS_MAC } from './ui.js';
 import { state, on } from './state.js';
 import { currentTheme, onThemeChange, terminalTheme } from './themes.js';
 
@@ -38,6 +38,14 @@ export async function newTerminal(cwd = state.root) {
   const t = { id, term, fit, el, title: 'zsh', alive: true };
   terms.push(t);
   term.attachCustomKeyEventHandler(e => {
+    if (!IS_MAC) {
+      // Windows: Ctrl+C copia se houver seleção (senão interrompe o comando); Ctrl+V cola
+      if (e.type !== 'keydown' || !e.ctrlKey || e.altKey) return true;
+      const k = e.key.toLowerCase();
+      if (k === 'c' && (term.hasSelection() || e.shiftKey)) { navigator.clipboard.writeText(term.getSelection()); term.clearSelection(); e.preventDefault(); return false; }
+      if (k === 'v') { e.preventDefault(); navigator.clipboard.readText().then(t => t && term.paste(t)); return false; }
+      return true;
+    }
     if (e.type === 'keydown' && e.metaKey && e.key === 'k') { term.clear(); return false; }
     // ⌘← / ⌘→: início/fim da linha; ⌥⌫ apaga palavra
     if (e.type === 'keydown' && e.metaKey && e.key === 'ArrowLeft') { api.send('pty:write', id, '\x01'); return false; }

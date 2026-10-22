@@ -1,15 +1,16 @@
 {
   "name": "lezx-code",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Lezx Code — IDE leve para desenvolvimento web, inspirada no VS Code",
   "main": "main.js",
   "scripts": {
     "build": "node build.mjs",
     "start": "node build.mjs && electron .",
     "dev": "electron .",
-    "postinstall": "chmod +x node_modules/node-pty/prebuilds/*/spawn-helper 2>/dev/null || true",
-    "dist": "node build.mjs && electron-builder --mac dmg --arm64",
-    "dist:universal": "node build.mjs && electron-builder --mac dmg --universal"
+    "postinstall": "node scripts/postinstall.js",
+    "dist": "node build.mjs && electron-builder --mac dmg zip --arm64 --publish never",
+    "dist:win": "node build.mjs && electron-builder --win nsis --x64 --publish never",
+    "dist:mac": "node build.mjs && electron-builder --mac dmg zip --arm64 --x64 --publish never"
   },
   "author": "Joao Victor Ifran",
   "license": "MIT",
@@ -50,9 +51,10 @@
       "examples/**",
       "package.json",
       "!node_modules/node-pty/{src,deps,scripts,typings,binding.gyp,third_party}/**",
-      "!node_modules/node-pty/prebuilds/win32-*/**",
       "!node_modules/node-pty/lib/*.test.js",
-      "!node_modules/node-pty/lib/*.map"
+      "!node_modules/node-pty/lib/*.map",
+      "!node_modules/node-pty/prebuilds/*/*.pdb",
+      "!node_modules/node-pty/**/*.pdb"
     ],
     "asarUnpack": [
       "node_modules/node-pty/**"
@@ -68,7 +70,8 @@
       "category": "public.app-category.developer-tools",
       "icon": "build/icon.icns",
       "target": [
-        "dmg"
+        "dmg",
+        "zip"
       ],
       "identity": null,
       "darkModeSupport": true,
@@ -96,7 +99,17 @@
           }
         ]
       },
-      "x64ArchFiles": "Contents/Resources/app.asar.unpacked/node_modules/node-pty/prebuilds/**"
+      "x64ArchFiles": "Contents/Resources/app.asar.unpacked/node_modules/node-pty/prebuilds/**",
+      "files": [
+        "!node_modules/node-pty/prebuilds/win32-*/**"
+      ],
+      "artifactName": "Lezx-Code-${version}-${arch}-mac.${ext}",
+      "extraResources": [
+        {
+          "from": "resources/lezx",
+          "to": "lezx"
+        }
+      ]
     },
     "dmg": {
       "title": "Lezx Code",
@@ -117,6 +130,39 @@
         "height": 380
       }
     },
-    "afterPack": "build/after-pack.js"
+    "afterPack": "build/after-pack.js",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png",
+      "files": [
+        "build/icon.png",
+        "!node_modules/node-pty/prebuilds/darwin-*/**",
+        "!node_modules/node-pty/prebuilds/win32-arm64/**"
+      ],
+      "artifactName": "Lezx-Code-${version}-${arch}-setup.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Lezx Code",
+      "installerLanguages": [
+        "pt_BR"
+      ],
+      "language": "1046",
+      "uninstallDisplayName": "Lezx Code"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jvictorifran/LezxCode.git"
   }
 }

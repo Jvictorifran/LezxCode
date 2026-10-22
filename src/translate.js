@@ -1,5 +1,5 @@
 // Tradução das mensagens de erro (regras em JSON: translations/pt-BR.json + pasta do usuário)
-import { api, toast } from './ui.js';
+import { api, toast, kb } from './ui.js';
 import { state, emit, on } from './state.js';
 
 let rules = [];
@@ -36,7 +36,7 @@ export function translate(message, lang) {
   const base = first.replace(FIX_SUFFIX, '').trim();
   const t = translateLine(base, lang);
   if (t == null) return null;
-  return [t + (fix ? ' (correção disponível: ⌘.)' : ''), ...rest].join('\n');
+  return [t + (fix ? kb(' (correção disponível: ⌘.)') : ''), ...rest].join('\n');
 }
 
 // texto para o marcador: tradução em cima, original embaixo (aparece ao passar o mouse)

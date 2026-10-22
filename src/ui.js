@@ -1,5 +1,41 @@
 // Utilitários de interface compartilhados
 export const api = window.lezx;
+export const IS_MAC = api.platform === 'darwin';
+export const IS_WIN = api.platform === 'win32';
+// tecla "principal": ⌘ no Mac, Ctrl no Windows
+export const isMod = e => (IS_MAC ? e.metaKey : e.ctrlKey);
+export const REVEAL_LABEL = IS_MAC ? 'Mostrar no Finder' : 'Mostrar no Explorador de Arquivos';
+export const TRASH = IS_MAC ? 'o Lixo' : 'a Lixeira'; // "para o Lixo" / "para a Lixeira"
+
+// "⇧⌘P" -> "Ctrl+Shift+P" fora do Mac (os textos da interface são escritos com os símbolos do Mac)
+const SYM = { '⌃': 'Ctrl', '⌘': 'Ctrl', '⇧': 'Shift', '⌥': 'Alt' };
+export function kb(text) {
+  if (IS_MAC || typeof text !== 'string' || !/[⌘⌥⇧⌃⌫↵]/.test(text)) return text;
+  return text.replace(/([⌘⌥⇧⌃]+)([^\s⌘⌥⇧⌃,)/]*)/g, (_, mods, key) => {
+    const set = new Set([...mods].map(m => SYM[m]));
+    const parts = ['Ctrl', 'Shift', 'Alt'].filter(m => set.has(m));
+    return key ? parts.join('+') + '+' + key : parts.join('+');
+  }).replace(/⌫/g, 'Backspace').replace(/↵/g, 'Enter');
+}
+
+// converte textos, dicas e placeholders da interface (nunca dentro do editor ou do terminal)
+export function localizeKeys(root = document.body) {
+  if (IS_MAC) return;
+  const fix = node => {
+    if (node.nodeType === 3) { if (/[⌘⌥⇧⌃]/.test(node.nodeValue) && !node.parentElement?.closest('.monaco-editor, .xterm')) node.nodeValue = kb(node.nodeValue); return; }
+    if (node.nodeType !== 1 || node.closest('.monaco-editor, .xterm')) return;
+    for (const a of ['title', 'placeholder']) if (node.hasAttribute?.(a)) { const v = node.getAttribute(a); const n = kb(v); if (n !== v) node.setAttribute(a, n); }
+    for (const c of node.childNodes) fix(c);
+  };
+  fix(root);
+  new MutationObserver(records => {
+    for (const r of records) {
+      if (r.type === 'characterData') fix(r.target);
+      else if (r.type === 'attributes') fix(r.target);
+      else for (const n of r.addedNodes) fix(n);
+    }
+  }).observe(root, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['title', 'placeholder'] });
+}
 export const $ = (sel, el = document) => el.querySelector(sel);
 export const $$ = (sel, el = document) => [...el.querySelectorAll(sel)];
 
@@ -36,7 +72,7 @@ export function toast(message, type = 'info', ms = 3500) {
 
 export function errorToast(e) { toast(String(e?.message || e).replace(/^Error invoking remote method '[^']+': (Error: )?/, ''), 'error', 6000); }
 
-export async function contextMenu(items) { return api.invoke('menu:context', items); }
+export async function contextMenu(items) { return api.invoke('menu:context', items.map(it => (it.label ? { ...it, label: kb(it.label) } : it))); }
 
 // arrastar para redimensionar
 export function makeSash(sash, { axis, get, set, onEnd }) {

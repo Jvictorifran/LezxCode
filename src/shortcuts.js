@@ -1,5 +1,5 @@
 // Página "Atalhos de teclado": as teclas do editor são lidas do próprio Monaco
-import { $, h } from './ui.js';
+import { $, h, kb } from './ui.js';
 import { on } from './state.js';
 import { editor } from './editor.js';
 
@@ -95,7 +95,7 @@ function keyFor(id, fallback) {
     const label = kb?.getLabel();
     if (label) return label;
   } catch {}
-  return fallback;
+  return kb(fallback);
 }
 
 let filter = '';

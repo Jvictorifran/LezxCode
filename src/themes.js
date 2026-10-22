@@ -192,6 +192,7 @@ export async function applyTheme(id) {
   const root = document.documentElement.style;
   for (const [k, v] of Object.entries(vars)) root.setProperty(k, v);
   document.documentElement.dataset.theme = theme.type === 'light' ? 'light' : 'dark';
+  api.send('app:titlebar', vars['--titlebar-bg'], vars['--titlebar-fg']); // botões da janela no Windows
   current = theme;
   for (const fn of listeners) fn(theme);
 }

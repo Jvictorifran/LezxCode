@@ -34,7 +34,7 @@ function createExtensionManager({ appDir, userDir, readJSON, send }) {
   // procura o executável do servidor: primeiro nos servidores baixados pelo Lezx, depois no PATH
   async function findServer(server) {
     if (!server?.command) return null;
-    const local = path.join(serversDir, 'node_modules', '.bin', server.command);
+    const local = path.join(serversDir, 'node_modules', '.bin', server.command + (process.platform === 'win32' ? '.cmd' : ''));
     if (fs.existsSync(local)) return local;
     return lsp.which(server.command);
   }
@@ -60,7 +60,7 @@ function createExtensionManager({ appDir, userDir, readJSON, send }) {
         await fsp.writeFile(path.join(serversDir, 'package.json'), JSON.stringify({ name: 'lezx-servers', private: true }, null, 2));
       }
       const pkgs = Array.isArray(pkg) ? pkg : [pkg];
-      const p = spawn(npm, ['install', '--no-audit', '--no-fund', '--loglevel=error', ...pkgs], { cwd: serversDir, env: process.env });
+      const p = spawn(npm, ['install', '--no-audit', '--no-fund', '--loglevel=error', ...pkgs], { cwd: serversDir, env: process.env, shell: lsp.needsShell(npm), windowsHide: true });
       let err = '';
       p.stdout.on('data', d => send('ext:progress', id, String(d).trim().split('\n').pop()));
       p.stderr.on('data', d => { err += d; });
@@ -99,7 +99,7 @@ function createExtensionManager({ appDir, userDir, readJSON, send }) {
     if (ext?.server?.npm) {
       const npm = await lsp.which('npm');
       if (npm && fs.existsSync(path.join(serversDir, 'node_modules'))) {
-        await new Promise(r => spawn(npm, ['uninstall', '--no-audit', '--no-fund', ...[].concat(ext.server.npm)], { cwd: serversDir }).on('exit', r).on('error', r));
+        await new Promise(r => spawn(npm, ['uninstall', '--no-audit', '--no-fund', ...[].concat(ext.server.npm)], { cwd: serversDir, shell: lsp.needsShell(npm), windowsHide: true }).on('exit', r).on('error', r));
       }
     }
     send('ext:changed');

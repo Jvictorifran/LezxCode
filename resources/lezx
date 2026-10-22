@@ -1,0 +1,6 @@
+#!/bin/sh
+# lezx [pasta|arquivo...] — abre no Lezx Code (instalado pelo Homebrew como comando "lezx")
+if [ "$#" -eq 0 ]; then
+  exec open -a "Lezx Code"
+fi
+exec open -a "Lezx Code" "$@"

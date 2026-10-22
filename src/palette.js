@@ -1,5 +1,5 @@
 // Paleta de comandos / Quick Open / seletor genérico
-import { $, h } from './ui.js';
+import { $, h, kb } from './ui.js';
 
 let cfg = null;
 let items = [];
@@ -97,7 +97,7 @@ function render() {
       it.icon || null,
       h('span', { class: 'pl' }, ...highlight(it.label, it._hits?.filter(x => x < it.label.length))),
       it.description ? h('span', { class: 'pd' }, it.description) : null,
-      it.key ? h('span', { class: 'pk' }, ...it.key.split(' ').map(k => h('kbd', {}, k))) : null
+      it.key ? h('span', { class: 'pk' }, ...kb(it.key).split(' ').map(k => h('kbd', {}, k))) : null
     ));
   });
   box.replaceChildren(...nodes);

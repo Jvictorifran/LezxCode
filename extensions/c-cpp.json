@@ -6,7 +6,7 @@
     "text": "C",
     "color": "#5c9fd8"
   },
-  "description": "Erros em tempo real, autocompletar inteligente, ir para definição, formatação e correções rápidas com o clangd (vem com as ferramentas de linha de comando da Apple).",
+  "description": "Erros em tempo real, autocompletar inteligente, ir para definição, formatação e correções rápidas com o clangd (no Mac já vem com as ferramentas da Apple; no Windows instale o LLVM).",
   "languages": [
     "c",
     "cpp"
@@ -20,7 +20,8 @@
       "--function-arg-placeholders=0",
       "--fallback-style={BasedOnStyle: LLVM, IndentWidth: 4}"
     ],
-    "installHint": "xcode-select --install"
+    "installHint": "xcode-select --install",
+    "installHintWin": "winget install LLVM.LLVM"
   },
   "keywords": [
     "auto",

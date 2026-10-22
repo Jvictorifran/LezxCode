@@ -6,10 +6,14 @@ const path = require('path');
 
 const servers = new Map(); // id -> { proc, buffer }
 let loginPath = null;
+const IS_WIN = process.platform === 'win32';
+// no Windows, npm/pyright etc. são scripts .cmd: precisam de shell para executar
+const needsShell = bin => IS_WIN && /\.(cmd|bat)$/i.test(bin);
 
 // Apps abertos pelo Finder não herdam o PATH do terminal (/opt/homebrew/bin etc.)
 function resolveLoginPath() {
   if (loginPath) return Promise.resolve(loginPath);
+  if (IS_WIN) { loginPath = process.env.PATH || process.env.Path || ''; return Promise.resolve(loginPath); }
   return new Promise(resolve => {
     const shell = process.env.SHELL || '/bin/zsh';
     execFile(shell, ['-lc', 'printf "%s" "$PATH"'], { timeout: 4000 }, (err, out) => {
@@ -23,11 +27,20 @@ function resolveLoginPath() {
 }
 
 async function which(cmd) {
-  if (path.isAbsolute(cmd)) return fs.existsSync(cmd) ? cmd : null;
+  const exts = IS_WIN ? ['', ...(process.env.PATHEXT || '.EXE;.CMD;.BAT;.COM').split(';').map(e => e.toLowerCase())] : [''];
+  if (path.isAbsolute(cmd)) {
+    for (const e of exts) if (fs.existsSync(cmd + e) && (!IS_WIN || e || path.extname(cmd))) return cmd + e;
+    return null;
+  }
   const p = await resolveLoginPath();
-  for (const dir of p.split(':')) {
-    const full = path.join(dir, cmd);
-    try { fs.accessSync(full, fs.constants.X_OK); return full; } catch {}
+  for (const dir of p.split(path.delimiter)) {
+    if (!dir) continue;
+    for (const e of exts) {
+      const full = path.join(dir, cmd + e);
+      // no Windows ignora o arquivo sem extensão (script sh do npm que o Windows não executa)
+      if (IS_WIN && !path.extname(full)) continue;
+      try { fs.accessSync(full, IS_WIN ? fs.constants.F_OK : fs.constants.X_OK); return full; } catch {}
+    }
   }
   return null;
 }
@@ -36,7 +49,7 @@ async function start(id, config, root, send) {
   stop(id);
   const bin = await which(config.command);
   if (!bin) return { ok: false, error: `"${config.command}" não encontrado no PATH` };
-  const proc = spawn(bin, config.args || [], { cwd: root || process.env.HOME, env: { ...process.env, PATH: loginPath }, stdio: ['pipe', 'pipe', 'pipe'] });
+  const proc = spawn(bin, config.args || [], { cwd: root || require('os').homedir(), env: { ...process.env, PATH: loginPath }, stdio: ['pipe', 'pipe', 'pipe'], shell: needsShell(bin), windowsHide: true });
   const state = { proc, buffer: Buffer.alloc(0) };
   servers.set(id, state);
 
@@ -96,13 +109,15 @@ except SyntaxError as e:
 `;
 
 async function lintPython(file, text) {
-  const py = (await which('python3')) || '/usr/bin/python3';
+  // no Windows, "python3" costuma ser o atalho da Microsoft Store: tenta "python" e o launcher "py"
+  const py = IS_WIN ? ((await which('python')) || (await which('py')) || (await which('python3'))) : ((await which('python3')) || '/usr/bin/python3');
+  if (!py) return [];
   return new Promise(resolve => {
-    const p = execFile(py, ['-I', '-c', PY_CHECK, file || '<editor>'], { timeout: 5000, maxBuffer: 1 << 20 }, (err, out) => {
+    const p = execFile(py, ['-I', '-c', PY_CHECK, file || '<editor>'], { timeout: 5000, maxBuffer: 1 << 20, windowsHide: true }, (err, out) => {
       try { resolve(JSON.parse(out)); } catch { resolve([]); }
     });
     p.stdin.end(text);
   });
 }
 
-module.exports = { start, write, stop, stopAll, which, lintPython, resolveLoginPath };
+module.exports = { start, write, stop, stopAll, which, lintPython, resolveLoginPath, needsShell };

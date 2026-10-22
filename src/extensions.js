@@ -1,9 +1,10 @@
 // Extensões de linguagem: aba lateral, snippets/palavras-chave, verificação de sintaxe e início dos servidores LSP
 import * as monaco from './gen/monaco-lite.js';
-import { api, $, h, toast, errorToast, debounce } from './ui.js';
+import { api, $, h, toast, errorToast, debounce, IS_WIN } from './ui.js';
 import { state, on, emit } from './state.js';
 import { startClient, stopClient, hasLanguageServer, runningClients, initLsp, notifySaved } from './lsp-client.js';
 import { markerMessage } from './translate.js';
+import { uriToPath } from './editor.js';
 
 let list = [];
 let query = '';
@@ -63,7 +64,7 @@ function attachLint(model) {
   const run = debounce(async () => {
     if (model.isDisposed()) return;
     if (hasLanguageServer('python')) { monaco.editor.setModelMarkers(model, 'lint:python', []); return; }
-    const errs = await api.invoke('lint:python', model.uri.scheme === 'file' ? model.uri.fsPath : null, model.getValue()).catch(() => []);
+    const errs = await api.invoke('lint:python', model.uri.scheme === 'file' ? uriToPath(model.uri) : null, model.getValue()).catch(() => []);
     if (model.isDisposed()) return;
     monaco.editor.setModelMarkers(model, 'lint:python', errs.map(e => ({
       startLineNumber: e.line, startColumn: e.col, endLineNumber: e.endLine || e.line, endColumn: Math.max(e.endCol || e.col + 1, e.col + 1),
@@ -139,8 +140,9 @@ function statusLine(ext) {
     h('a', { href: '#', onclick: e => { e.preventDefault(); lspStatus.delete(ext.id); ensureServers(); } }, 'tentar de novo'));
   if (ext.serverState === 'ready') return h('div', { class: 'ext-status ok' }, h('i', { class: 'codicon codicon-check' }), h('span', {}, ext.installed ? `${cmdName} pronto (inicia ao abrir um arquivo)` : `${cmdName} encontrado no seu Mac`));
   if (ext.serverState === 'npm') return h('div', { class: 'ext-status' }, h('i', { class: 'codicon codicon-cloud-download' }), `Baixa ${[].concat(ext.serverConfig.npm).join(', ')} via npm`);
+  const hint = (IS_WIN && ext.serverConfig.installHintWin) || ext.serverConfig.installHint;
   return h('div', { class: 'ext-status warn' }, h('i', { class: 'codicon codicon-warning' }), `Precisa de ${cmdName}`,
-    ext.serverConfig.installHint ? h('a', { href: '#', title: ext.serverConfig.installHint, onclick: e => { e.preventDefault(); emit('command', 'terminal.run', ext.serverConfig.installHint); } }, 'instalar no terminal') : null);
+    hint ? h('a', { href: '#', title: hint, onclick: e => { e.preventDefault(); emit('command', 'terminal.run', hint); } }, 'instalar no terminal') : null);
 }
 
 function card(ext) {

@@ -5,6 +5,20 @@ const fs = require('fs');
 const fsp = fs.promises;
 const { pathToFileURL } = require('url');
 const liveServer = require('./live-server');
+
+const IS_MAC = process.platform === 'darwin';
+const IS_WIN = process.platform === 'win32';
+// no Windows a interface trabalha com "C:/pasta/arquivo" (barras normais): o Node aceita e o renderer usa "/" em tudo
+const WIN_PATH = /^(?:[A-Za-z]:\\|\\\\)/;
+function uiPaths(v, key) {
+  if (!IS_WIN || key === 'content') return v;
+  if (typeof v === 'string') return WIN_PATH.test(v) ? v.replace(/\\/g, '/') : v;
+  if (Array.isArray(v)) return v.map(x => uiPaths(x));
+  if (v && typeof v === 'object') { const o = {}; for (const [k, x] of Object.entries(v)) o[k] = uiPaths(x, k); return o; }
+  return v;
+}
+// canais cujo conteúdo não pode ser convertido (saída do terminal, mensagens LSP, conteúdo de arquivos)
+const RAW_CHANNELS = new Set(['pty:data', 'lsp:message', 'fs:readFile', 'fs:readDataUrl', 'lint:python', 'ext:progress']);
 const { createFontStore, systemFonts } = require('./fonts');
 const lsp = require('./lsp');
 const { createExtensionManager } = require('./extensions');
@@ -32,7 +46,7 @@ const DEFAULT_SETTINGS = {
   'editor.fontSize': 14,
   'editor.lineHeight': 0,
   'editor.cursorStyle': 'line',
-  'editor.fontFamily': "'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Monaco, monospace",
+  'editor.fontFamily': "'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, 'Cascadia Code', Consolas, monospace",
   'editor.fontLigatures': false,
   'editor.tabSize': 2,
   'editor.insertSpaces': true,
@@ -51,7 +65,7 @@ const DEFAULT_SETTINGS = {
   'files.exclude': ['.git', '.DS_Store'],
   'search.exclude': ['node_modules', '.git', 'dist', 'build', '.next', 'vendor'],
   'terminal.fontSize': 13,
-  'terminal.fontFamily': "'FiraCode Nerd Font Mono', 'MesloLGS NF', 'JetBrainsMono Nerd Font Mono', 'Hack Nerd Font Mono', 'SF Mono', Menlo, monospace",
+  'terminal.fontFamily': "'FiraCode Nerd Font Mono', 'MesloLGS NF', 'JetBrainsMono Nerd Font Mono', 'Hack Nerd Font Mono', 'SF Mono', Menlo, 'Cascadia Mono', Consolas, monospace",
   'terminal.lineHeight': 1.1,
   'terminal.cursorStyle': 'block',
   'terminal.shell': '',
@@ -73,7 +87,7 @@ const terminals = new Map();
 
 // ---------- utilidades ----------
 function send(channel, ...args) {
-  if (win && !win.isDestroyed()) win.webContents.send(channel, ...args);
+  if (win && !win.isDestroyed()) win.webContents.send(channel, ...(RAW_CHANNELS.has(channel) ? args : args.map(a => uiPaths(a))));
 }
 
 function readJSON(file, fallback) {
@@ -278,6 +292,12 @@ function setRoot(root) {
 
 // ---------- IPC ----------
 function registerIpc() {
+  const rawHandle = ipcMain.handle.bind(ipcMain);
+  // respostas passam por uiPaths (só tem efeito no Windows)
+  ipcMain.handle = (channel, fn) => rawHandle(channel, async (...a) => {
+    const r = await fn(...a);
+    return RAW_CHANNELS.has(channel) ? r : uiPaths(r);
+  });
   ipcMain.handle('app:info', () => ({
     userDir: USER_DIR, themesDir: USER_THEMES, iconThemesDir: USER_ICON_THEMES,
     settingsFile: SETTINGS_FILE, home: app.getPath('home'), version: app.getVersion(),
@@ -436,19 +456,21 @@ function registerIpc() {
   ipcMain.handle('pty:create', (_e, opts) => {
     if (!pty) throw new Error('Terminal indisponível');
     const settings = loadSettings();
-    const shellPath = settings['terminal.shell'] || process.env.SHELL || '/bin/zsh';
+    const shellPath = settings['terminal.shell'] || (IS_WIN ? 'powershell.exe' : process.env.SHELL || '/bin/zsh');
     const id = opts.id;
-    const p = pty.spawn(shellPath, ['-l'], {
+    const cwd = opts.cwd && fs.existsSync(opts.cwd) ? path.normalize(opts.cwd) : app.getPath('home');
+    const p = pty.spawn(shellPath, IS_WIN ? [] : ['-l'], {
       name: 'xterm-256color',
       cols: opts.cols || 80,
       rows: opts.rows || 24,
-      cwd: opts.cwd && fs.existsSync(opts.cwd) ? opts.cwd : app.getPath('home'),
-      env: { ...process.env, TERM: 'xterm-256color', COLORTERM: 'truecolor', TERM_PROGRAM: 'LezxCode', LANG: process.env.LANG || 'pt_BR.UTF-8' }
+      cwd,
+      env: { ...process.env, TERM: 'xterm-256color', COLORTERM: 'truecolor', TERM_PROGRAM: 'LezxCode', ...(IS_WIN ? {} : { LANG: process.env.LANG || 'pt_BR.UTF-8' }) },
+      useConpty: IS_WIN ? true : undefined
     });
     terminals.set(id, p);
     p.onData(d => send('pty:data', id, d));
     p.onExit(({ exitCode }) => { terminals.delete(id); send('pty:exit', id, exitCode); });
-    return { pid: p.pid, shell: path.basename(shellPath) };
+    return { pid: p.pid, shell: path.basename(shellPath).replace(/\.exe$/i, '') };
   });
   ipcMain.on('pty:write', (_e, id, data) => terminals.get(id)?.write(data));
   ipcMain.on('pty:resize', (_e, id, cols, rows) => { try { terminals.get(id)?.resize(Math.max(cols, 2), Math.max(rows, 1)); } catch {} });
@@ -468,9 +490,12 @@ function registerIpc() {
   ipcMain.handle('live:status', () => liveServer.status());
 
   ipcMain.handle('shell:openExternal', (_e, url) => shell.openExternal(url));
-  ipcMain.handle('shell:reveal', (_e, p) => shell.showItemInFolder(p));
-  ipcMain.handle('shell:openPath', (_e, p) => shell.openPath(p));
-  ipcMain.on('app:dirty', (_e, n) => { dirtyCount = n; if (win) win.setDocumentEdited(n > 0); });
+  ipcMain.handle('shell:reveal', (_e, p) => shell.showItemInFolder(path.normalize(p)));
+  ipcMain.handle('shell:openPath', (_e, p) => shell.openPath(path.normalize(p)));
+  ipcMain.on('app:dirty', (_e, n) => { dirtyCount = n; if (win && IS_MAC) win.setDocumentEdited(n > 0); });
+  // Windows: o menu fica num botão na barra de título; cores dos botões da janela seguem o tema
+  ipcMain.on('menu:app', (_e, x, y) => Menu.getApplicationMenu()?.popup({ window: win, x, y }));
+  ipcMain.on('app:titlebar', (_e, color, symbolColor) => { if (IS_WIN && win) try { win.setTitleBarOverlay({ color, symbolColor, height: 36 }); } catch {} });
   ipcMain.on('app:title', (_e, t) => { if (win) win.setTitle(t); });
 
   ipcMain.handle('menu:context', (e, items) => new Promise(resolve => {
@@ -487,23 +512,28 @@ function registerIpc() {
 function cmd(id) { return () => send('command', id); }
 
 function rebuildMenu() {
+  const about = () => dialog.showMessageBox(win, { type: 'info', title: 'Lezx Code', message: `Lezx Code ${app.getVersion()}`, detail: 'IDE leve para desenvolvimento web.\nhttps://github.com/Jvictorifran/LezxCode' });
+  // no Windows os atalhos de edição ficam com o editor/terminal (Ctrl+C no terminal precisa continuar sendo "interromper")
+  const editRole = (role, label) => ({ role, label, ...(IS_WIN ? { registerAccelerator: false } : {}) });
   const template = [
     {
       label: 'Lezx Code',
       submenu: [
-        { role: 'about', label: 'Sobre o Lezx Code' },
+        IS_MAC ? { role: 'about', label: 'Sobre o Lezx Code' } : { label: 'Sobre o Lezx Code', click: about },
         { type: 'separator' },
-        { label: 'Configurações', accelerator: 'Cmd+,', click: cmd('settings.open') },
+        { label: 'Configurações', accelerator: 'CmdOrCtrl+,', click: cmd('settings.open') },
         { label: 'Configurações (JSON)', click: cmd('settings.openJson') },
-        { label: 'Tema de Cores… (⌘K ⌘T)', click: cmd('theme.pick') },
+        { label: IS_MAC ? 'Tema de Cores… (⌘K ⌘T)' : 'Tema de Cores… (Ctrl+K Ctrl+T)', click: cmd('theme.pick') },
         { label: 'Tema de Ícones…', click: cmd('iconTheme.pick') },
         { label: 'Abrir pasta de temas', click: cmd('theme.openFolder') },
-        { type: 'separator' },
-        { role: 'services' },
-        { type: 'separator' },
-        { role: 'hide', label: 'Ocultar Lezx Code' },
-        { role: 'hideOthers', label: 'Ocultar outros' },
-        { role: 'unhide', label: 'Mostrar tudo' },
+        ...(IS_MAC ? [
+          { type: 'separator' },
+          { role: 'services' },
+          { type: 'separator' },
+          { role: 'hide', label: 'Ocultar Lezx Code' },
+          { role: 'hideOthers', label: 'Ocultar outros' },
+          { role: 'unhide', label: 'Mostrar tudo' }
+        ] : []),
         { type: 'separator' },
         { role: 'quit', label: 'Sair do Lezx Code' }
       ]
@@ -511,9 +541,9 @@ function rebuildMenu() {
     {
       label: 'Arquivo',
       submenu: [
-        { label: 'Novo arquivo', accelerator: 'Cmd+N', click: cmd('file.new') },
-        { label: 'Abrir…', accelerator: 'Cmd+O', click: cmd('file.openAny') },
-        { label: 'Abrir pasta…', accelerator: 'Cmd+Shift+O', click: cmd('folder.open') },
+        { label: 'Novo arquivo', accelerator: 'CmdOrCtrl+N', click: cmd('file.new') },
+        { label: 'Abrir…', accelerator: 'CmdOrCtrl+O', click: cmd('file.openAny') },
+        { label: 'Abrir pasta…', accelerator: 'CmdOrCtrl+Shift+O', click: cmd('folder.open') },
         {
           label: 'Abrir pasta recente',
           submenu: recentFolders().length
@@ -522,45 +552,45 @@ function rebuildMenu() {
             : [{ label: 'Nenhuma pasta recente', enabled: false }]
         },
         { type: 'separator' },
-        { label: 'Salvar', accelerator: 'Cmd+S', click: cmd('file.save') },
-        { label: 'Salvar como…', accelerator: 'Cmd+Shift+S', click: cmd('file.saveAs') },
-        { label: 'Salvar tudo', accelerator: 'Cmd+Alt+S', click: cmd('file.saveAll') },
+        { label: 'Salvar', accelerator: 'CmdOrCtrl+S', click: cmd('file.save') },
+        { label: 'Salvar como…', accelerator: 'CmdOrCtrl+Shift+S', click: cmd('file.saveAs') },
+        { label: 'Salvar tudo', accelerator: 'CmdOrCtrl+Alt+S', click: cmd('file.saveAll') },
         { type: 'separator' },
-        { label: 'Fechar aba', accelerator: 'Cmd+W', click: cmd('tab.close') },
+        { label: 'Fechar aba', accelerator: 'CmdOrCtrl+W', click: cmd('tab.close') },
         { label: 'Fechar pasta', click: cmd('folder.close') },
-        { label: 'Fechar janela', accelerator: 'Cmd+Shift+W', role: 'close' }
+        { label: 'Fechar janela', accelerator: 'CmdOrCtrl+Shift+W', role: 'close' }
       ]
     },
     {
       label: 'Editar',
       submenu: [
-        { label: 'Desfazer', accelerator: 'Cmd+Z', click: cmd('edit.undo') },
-        { label: 'Refazer', accelerator: 'Cmd+Shift+Z', click: cmd('edit.redo') },
+        { label: 'Desfazer', accelerator: 'CmdOrCtrl+Z', registerAccelerator: !IS_WIN, click: cmd('edit.undo') },
+        { label: 'Refazer', accelerator: IS_WIN ? 'Ctrl+Y' : 'CmdOrCtrl+Shift+Z', registerAccelerator: !IS_WIN, click: cmd('edit.redo') },
         { type: 'separator' },
-        { role: 'cut', label: 'Recortar' },
-        { role: 'copy', label: 'Copiar' },
-        { role: 'paste', label: 'Colar' },
-        { role: 'selectAll', label: 'Selecionar tudo' },
+        editRole('cut', 'Recortar'),
+        editRole('copy', 'Copiar'),
+        editRole('paste', 'Colar'),
+        editRole('selectAll', 'Selecionar tudo'),
         { type: 'separator' },
-        { label: 'Localizar', accelerator: 'Cmd+F', click: cmd('edit.find') },
-        { label: 'Substituir', accelerator: 'Cmd+Alt+F', click: cmd('edit.replace') },
-        { label: 'Pesquisar nos arquivos', accelerator: 'Cmd+Shift+F', click: cmd('view.search') },
+        { label: 'Localizar', accelerator: 'CmdOrCtrl+F', click: cmd('edit.find') },
+        { label: 'Substituir', accelerator: 'CmdOrCtrl+Alt+F', click: cmd('edit.replace') },
+        { label: 'Pesquisar nos arquivos', accelerator: 'CmdOrCtrl+Shift+F', click: cmd('view.search') },
         { type: 'separator' },
         { label: 'Formatar documento', accelerator: 'Shift+Alt+F', click: cmd('editor.format') },
-        { label: 'Comentar linha', accelerator: 'Cmd+/', click: cmd('editor.comment') }
+        { label: 'Comentar linha', accelerator: 'CmdOrCtrl+/', click: cmd('editor.comment') }
       ]
     },
     {
       label: 'Exibir',
       submenu: [
-        { label: 'Paleta de comandos…', accelerator: 'Cmd+Shift+P', click: cmd('palette.commands') },
-        { label: 'Ir para arquivo…', accelerator: 'Cmd+P', click: cmd('palette.files') },
+        { label: 'Paleta de comandos…', accelerator: 'CmdOrCtrl+Shift+P', click: cmd('palette.commands') },
+        { label: 'Ir para arquivo…', accelerator: 'CmdOrCtrl+P', click: cmd('palette.files') },
         { label: 'Ir para linha…', accelerator: 'Ctrl+G', click: cmd('editor.gotoLine') },
         { type: 'separator' },
-        { label: 'Explorador', accelerator: 'Cmd+Shift+E', click: cmd('view.explorer') },
-        { label: 'Alternar barra lateral', accelerator: 'Cmd+B', click: cmd('view.toggleSidebar') },
+        { label: 'Explorador', accelerator: 'CmdOrCtrl+Shift+E', click: cmd('view.explorer') },
+        { label: 'Alternar barra lateral', accelerator: 'CmdOrCtrl+B', click: cmd('view.toggleSidebar') },
         { label: 'Alternar terminal', accelerator: 'Ctrl+`', click: cmd('terminal.toggle') },
-        { label: 'Alternar painel', accelerator: 'Cmd+J', click: cmd('terminal.toggle') },
+        { label: 'Alternar painel', accelerator: 'CmdOrCtrl+J', click: cmd('terminal.toggle') },
         { label: 'Novo terminal', accelerator: 'Ctrl+Shift+`', click: cmd('terminal.new') },
         { type: 'separator' },
         { label: 'Próxima aba', accelerator: 'Ctrl+Tab', click: cmd('tab.next') },
@@ -568,33 +598,33 @@ function rebuildMenu() {
         { type: 'separator' },
         { label: 'Quebra de linha', accelerator: 'Alt+Z', click: cmd('editor.toggleWrap') },
         { label: 'Minimapa', click: cmd('editor.toggleMinimap') },
-        { label: 'Aumentar fonte', accelerator: 'Cmd+=', click: cmd('font.increase') },
-        { label: 'Diminuir fonte', accelerator: 'Cmd+-', click: cmd('font.decrease') },
-        { label: 'Restaurar fonte', accelerator: 'Cmd+0', click: cmd('font.reset') },
+        { label: 'Aumentar fonte', accelerator: 'CmdOrCtrl+=', click: cmd('font.increase') },
+        { label: 'Diminuir fonte', accelerator: 'CmdOrCtrl+-', click: cmd('font.decrease') },
+        { label: 'Restaurar fonte', accelerator: 'CmdOrCtrl+0', click: cmd('font.reset') },
         { type: 'separator' },
         { role: 'togglefullscreen', label: 'Tela cheia' },
-        { role: 'toggleDevTools', label: 'Ferramentas de desenvolvedor', accelerator: 'Cmd+Alt+I' },
-        { role: 'reload', label: 'Recarregar janela', accelerator: 'Cmd+Shift+R' }
+        { role: 'toggleDevTools', label: 'Ferramentas de desenvolvedor', accelerator: 'CmdOrCtrl+Alt+I' },
+        { role: 'reload', label: 'Recarregar janela', accelerator: 'CmdOrCtrl+Shift+R' }
       ]
     },
     {
       label: 'Extensões',
       submenu: [
-        { label: 'Mostrar extensões', accelerator: 'Cmd+Shift+X', click: cmd('view.extensions') },
+        { label: 'Mostrar extensões', accelerator: 'CmdOrCtrl+Shift+X', click: cmd('view.extensions') },
         { label: 'Abrir pasta das minhas extensões', click: cmd('ext.openFolder') }
       ]
     },
     {
       label: 'Live Server',
       submenu: [
-        { label: 'Go Live (abrir no navegador)', accelerator: 'Cmd+Alt+L', click: cmd('live.start') },
-        { label: 'Parar Live Server', accelerator: 'Cmd+Alt+K', click: cmd('live.stop') }
+        { label: 'Go Live (abrir no navegador)', accelerator: 'CmdOrCtrl+Alt+L', click: cmd('live.start') },
+        { label: 'Parar Live Server', accelerator: 'CmdOrCtrl+Alt+K', click: cmd('live.stop') }
       ]
     },
     { role: 'windowMenu', label: 'Janela' },
     {
       role: 'help', label: 'Ajuda',
-      submenu: [{ label: 'Atalhos de teclado (⌘K ⌘S)', click: cmd('help.shortcuts') }]
+      submenu: [{ label: IS_MAC ? 'Atalhos de teclado (⌘K ⌘S)' : 'Atalhos de teclado (Ctrl+K Ctrl+S)', click: cmd('help.shortcuts') }]
     }
   ];
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
@@ -608,8 +638,9 @@ function createWindow() {
     minWidth: 600,
     minHeight: 400,
     title: 'Lezx Code',
-    titleBarStyle: 'hiddenInset',
-    trafficLightPosition: { x: 12, y: 10 },
+    ...(IS_MAC
+      ? { titleBarStyle: 'hiddenInset', trafficLightPosition: { x: 12, y: 10 } }
+      : { titleBarStyle: 'hidden', titleBarOverlay: { color: '#16171c', symbolColor: '#9aa0b0', height: 36 }, icon: path.join(APP_DIR, 'build', 'icon.png') }),
     backgroundColor: '#1b1d23',
     show: false,
     webPreferences: {

@@ -34,6 +34,6 @@ export function primaryFamily(css = '') {
 }
 
 export function composeFamily(family, kind) {
-  const fallback = kind === 'ui' ? "-apple-system, BlinkMacSystemFont, system-ui, sans-serif" : "'SF Mono', Menlo, monospace";
+  const fallback = kind === 'ui' ? "-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif" : "'SF Mono', Menlo, Consolas, monospace";
   return `'${family.replace(/'/g, '')}', ${fallback}`;
 }

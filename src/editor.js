@@ -1,7 +1,7 @@
 // Editor (Monaco) + abas
 import * as monaco from './gen/monaco-lite.js';
 import { emmetHTML, emmetCSS } from 'emmet-monaco-es';
-import { api, $, h, basename, dirname, relative, errorToast, toast, contextMenu } from './ui.js';
+import { api, $, h, basename, dirname, relative, errorToast, toast, contextMenu, isMod, REVEAL_LABEL } from './ui.js';
 import { state, emit, on } from './state.js';
 import { fileIcon, onIconThemeChange } from './icons.js';
 
@@ -121,14 +121,14 @@ export function initEditor() {
       if (resource.scheme !== 'file') return false;
       const p = selectionOrPosition;
       const line = p?.startLineNumber ?? p?.lineNumber, col = p?.startColumn ?? p?.column;
-      openFile(resource.fsPath, line ? { line, col } : {});
+      openFile(uriToPath(resource), line ? { line, col } : {});
       return true;
     }
   });
   window.addEventListener('keydown', e => {
     // ⌘K ⌘T fora do editor
-    if (e.metaKey && e.key.toLowerCase() === 'k' && !editor.hasTextFocus()) {
-      const next = ev => { window.removeEventListener('keydown', next, true); if (ev.metaKey && ev.key.toLowerCase() === 't') { ev.preventDefault(); emit('command', 'theme.pick'); } };
+    if (isMod(e) && e.key.toLowerCase() === 'k' && !editor.hasTextFocus()) {
+      const next = ev => { window.removeEventListener('keydown', next, true); if (isMod(ev) && ev.key.toLowerCase() === 't') { ev.preventDefault(); emit('command', 'theme.pick'); } };
       setTimeout(() => window.addEventListener('keydown', next, true), 0);
     }
   });
@@ -316,7 +316,7 @@ async function tabMenu(t) {
     { id: 'close', label: 'Fechar' }, { id: 'others', label: 'Fechar outras' }, { id: 'right', label: 'Fechar à direita' },
     { id: 'saved', label: 'Fechar salvas' }, { id: 'all', label: 'Fechar todas' }, { type: 'separator' },
     { id: 'copy', label: 'Copiar caminho', enabled: !!t.path }, { id: 'copyRel', label: 'Copiar caminho relativo', enabled: !!t.path },
-    { id: 'reveal', label: 'Mostrar no Finder', enabled: !!t.path }, { id: 'browser', label: 'Abrir no navegador padrão', enabled: !!t.path && /\.html?$/i.test(t.path) }
+    { id: 'reveal', label: REVEAL_LABEL, enabled: !!t.path }, { id: 'browser', label: 'Abrir no navegador padrão', enabled: !!t.path && /\.html?$/i.test(t.path) }
   ]);
   if (id === 'close') closeTab(t);
   else if (id === 'others') closeMany(tabs.filter(x => x !== t));
@@ -441,6 +441,12 @@ export function cycleTab(dir) {
 
 export function setLanguage(lang) {
   if (active?.kind === 'text') { monaco.editor.setModelLanguage(active.model, lang); emit('cursor'); }
+}
+
+// caminho no formato do app ("/Users/x/a.c" ou "C:/x/a.c"), independente do sistema
+export function uriToPath(uri) {
+  const p = decodeURIComponent(uri.path);
+  return /^\/[A-Za-z]:/.test(p) ? p[1].toUpperCase() + p.slice(2) : p;
 }
 
 export const languages = () => monaco.languages.getLanguages();

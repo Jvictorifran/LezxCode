@@ -1,5 +1,5 @@
 // Explorador de arquivos
-import { api, $, h, basename, dirname, join, relative, errorToast, contextMenu } from './ui.js';
+import { api, $, h, basename, dirname, join, relative, errorToast, contextMenu, isMod, IS_MAC, REVEAL_LABEL, TRASH } from './ui.js';
 import { state, emit } from './state.js';
 import { fileIcon, onIconThemeChange } from './icons.js';
 import { openFile, onRenamed, closeTab, tabs } from './editor.js';
@@ -193,7 +193,7 @@ export async function startNew(kind) {
 
 async function remove(entry) {
   const r = await api.invoke('dialog:confirm', {
-    message: `Mover "${entry.name}" para o Lixo?`, detail: 'Você pode restaurá-lo pelo Lixo do macOS.', buttons: ['Mover para o Lixo', 'Cancelar']
+    message: `Mover "${entry.name}" para ${TRASH}?`, detail: `Você pode restaurá-lo pel${TRASH}.`, buttons: [`Mover para ${TRASH}`, 'Cancelar']
   });
   if (r !== 0) return;
   try {
@@ -217,9 +217,9 @@ async function menu(entry) {
   const id = await contextMenu([
     { id: 'newFile', label: 'Novo arquivo…' }, { id: 'newFolder', label: 'Nova pasta…' }, { type: 'separator' },
     ...(isHtml ? [{ id: 'live', label: 'Abrir com Live Server' }, { type: 'separator' }] : []),
-    { id: 'reveal', label: 'Mostrar no Finder' }, { id: 'terminal', label: 'Abrir no terminal integrado' }, { type: 'separator' },
+    { id: 'reveal', label: REVEAL_LABEL }, { id: 'terminal', label: 'Abrir no terminal integrado' }, { type: 'separator' },
     { id: 'copyPath', label: 'Copiar caminho' }, { id: 'copyRel', label: 'Copiar caminho relativo' }, { type: 'separator' },
-    { id: 'rename', label: 'Renomear…' }, { id: 'duplicate', label: 'Duplicar' }, { id: 'delete', label: 'Mover para o Lixo' }
+    { id: 'rename', label: 'Renomear…' }, { id: 'duplicate', label: 'Duplicar' }, { id: 'delete', label: `Mover para ${TRASH}` }
   ]);
   if (id === 'newFile') startNew('new-file');
   else if (id === 'newFolder') startNew('new-folder');
@@ -261,7 +261,7 @@ export function initExplorer() {
     if (e.target !== t) return;
     e.preventDefault();
     selected = null;
-    const id = await contextMenu([{ id: 'newFile', label: 'Novo arquivo…' }, { id: 'newFolder', label: 'Nova pasta…' }, { type: 'separator' }, { id: 'reveal', label: 'Mostrar no Finder' }]);
+    const id = await contextMenu([{ id: 'newFile', label: 'Novo arquivo…' }, { id: 'newFolder', label: 'Nova pasta…' }, { type: 'separator' }, { id: 'reveal', label: REVEAL_LABEL }]);
     if (id === 'newFile') startNew('new-file');
     else if (id === 'newFolder') startNew('new-folder');
     else if (id === 'reveal') api.invoke('shell:openPath', state.root);
@@ -277,8 +277,8 @@ export function initExplorer() {
     else if (e.key === 'ArrowLeft' && cur) { if (cur.isDir && expanded.has(cur.path)) onClick(cur); else select(dirname(cur.path) === state.root ? cur.path : dirname(cur.path)); }
     else if (e.key === 'Enter' && cur) { editing = { kind: 'rename', path: cur.path }; render(); }
     else if (e.key === ' ' && cur) { e.preventDefault(); onClick(cur); }
-    else if (e.key === 'Backspace' && e.metaKey && cur) remove(cur);
-    else if (e.key === 'o' && e.metaKey && cur && !cur.isDir) { e.preventDefault(); openFile(cur.path); }
+    else if (cur && (IS_MAC ? e.key === 'Backspace' && e.metaKey : e.key === 'Delete')) remove(cur);
+    else if (e.key === 'o' && isMod(e) && cur && !cur.isDir) { e.preventDefault(); openFile(cur.path); }
   });
   onIconThemeChange(render);
   document.querySelector('#view-explorer .view-actions').addEventListener('click', e => {
