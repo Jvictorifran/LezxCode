@@ -53,11 +53,12 @@ jobs:
         run: |
           $setup = Get-ChildItem release/*-setup.exe | Select-Object -First 1
           Start-Process $setup.FullName -ArgumentList '/S' -Wait
-          $exe = "$env:LOCALAPPDATA\Programs\lezx-code\Lezx Code.exe"
-          if (!(Test-Path $exe)) { throw "App não instalado em $exe" }
+          $found = Get-ChildItem "$env:LOCALAPPDATA\Programs" -Recurse -Filter 'Lezx Code.exe' -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (!$found) { Get-ChildItem "$env:LOCALAPPDATA\Programs" | Out-String | Write-Host; throw 'App não instalado' }
+          Write-Host "App instalado em: $($found.FullName)"
+          $res = Join-Path $found.DirectoryName 'resources'
           $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
           Write-Host "PATH do usuário: $userPath"
-          $res = "$env:LOCALAPPDATA\Programs\lezx-code\resources"
           if (($userPath -split ';') -notcontains $res) { throw 'O instalador não colocou o lezx no PATH' }
           if (!(Test-Path "$res\lezx.cmd")) { throw 'lezx.cmd não encontrado' }
           Write-Host "OK: app instalado e lezx.cmd no PATH"

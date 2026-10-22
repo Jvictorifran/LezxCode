@@ -19,7 +19,7 @@ function die(msg) { console.error(`lezx: ${msg}`); process.exit(1); }
 function appCandidates() {
   if (IS_MAC) return ['/Applications/Lezx Code.app', path.join(os.homedir(), 'Applications', 'Lezx Code.app')];
   const local = process.env.LOCALAPPDATA || path.join(os.homedir(), 'AppData', 'Local');
-  return [path.join(local, 'Programs', 'lezx-code', 'Lezx Code.exe'), path.join(process.env.ProgramFiles || 'C:\\Program Files', 'Lezx Code', 'Lezx Code.exe')];
+  return [path.join(local, 'Programs', 'Lezx Code', 'Lezx Code.exe'), path.join(local, 'Programs', 'lezx-code', 'Lezx Code.exe'),path.join(process.env.ProgramFiles || 'C:\\Program Files', 'Lezx Code', 'Lezx Code.exe')];
 }
 const findApp = () => appCandidates().find(p => fs.existsSync(p));
 
